@@ -1,0 +1,412 @@
+0000.000 (0) Opened log file at time: Mon, 30 Dec 2013 16:42:51 +0000
+0000.001 (0) UpdraftPlus WordPress backup plugin (http://updraftplus.com): 1.8.2 WP: 3.8 PHP: 5.4.23 (Linux cpanel02-g2.swbroadband.co.uk 2.6.32-458.6.2.lve1.2.30.el6.x86_64 #1 SMP Fri Jul 12 15:02:22 EEST 2013 x86_64) MySQL: 5.5.34-cll Server: Apache safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 39.3M | 39.8M) multisite: N mcrypt: Y ZipArchive::addFile: Y W3TC/ObjectCache: N
+0000.224 (0) Free space on disk containing Updraft's temporary directory: 783632.3 Mb
+0000.227 (0) Tasks: Backup files: 1 (schedule: daily) Backup DB:  (schedule: daily)
+0000.228 (0) Processed schedules. Tasks now: Backup files: 1 Backup DB: 1
+0000.243 (0) Requesting semaphore lock (fd)
+0000.245 (0) Set semaphore last lock (fd) time to 2013-12-30 16:42:52
+0000.246 (0) Semaphore lock (fd) complete
+0000.249 (0) Backup run: resumption=0, nonce=8e652fb46595, begun at=1388421771 (1s ago), job type=backup
+0000.250 (0) Scheduling a resumption (1) after 300 seconds (1388422072) in case this run gets aborted
+0000.264 (0) Checking if we have a zip executable available
+0000.265 (0) Testing: /usr/bin/zip
+0000.289 (0) Output: zip warning: binziptest/test.zip not found or empty
+0000.290 (0) Output: adding: binziptest/subdir1/	(in=0) (out=0) (stored 0%)
+0000.291 (0) Output: adding: binziptest/subdir1/subdir2/	(in=0) (out=0) (stored 0%)
+0000.292 (0) Output: adding: binziptest/subdir1/subdir2/test.html	(in=127) (out=105) (deflated 17%)
+0000.293 (0) Output: total bytes=127, compressed=105 -> 17% savings
+0000.300 (0) Output: adding: binziptest/subdir1/subdir2/test2.html	(in=134) (out=109) (deflated 19%)
+0000.301 (0) Output: total bytes=261, compressed=214 -> 18% savings
+0000.321 (0) Working binary zip found: /usr/bin/zip
+0000.323 (0) Zip engine: found/will use a binary zip: /usr/bin/zip
+0000.323 (0) Creation of backups of directories: beginning
+0000.326 (0) Beginning creation of dump of plugins (split every: 800 Mb)
+0001.026 (0) Total entities for the zip file: 531 directories, 3731 files, 56 Mb
+0001.031 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 100 files added (on-disk size: 0 Kb)
+0001.035 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 200 files added (on-disk size: 0 Kb)
+0001.039 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 300 files added (on-disk size: 0 Kb)
+0001.042 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 400 files added (on-disk size: 0 Kb)
+0001.046 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 500 files added (on-disk size: 0 Kb)
+0001.047 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (6.5 Mb, 3731 files batched, 501 (501) added so far); re-opening (prior size: 0 Kb)
+0017.001 (0) backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: size is now: 3.20 Mb
+0017.027 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 600 files added (on-disk size: 3286.8 Kb)
+0017.031 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 700 files added (on-disk size: 3286.8 Kb)
+0017.035 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 800 files added (on-disk size: 3286.8 Kb)
+0017.039 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 900 files added (on-disk size: 3286.8 Kb)
+0017.043 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 1000 files added (on-disk size: 3286.8 Kb)
+0017.043 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (15.5 Mb, 3731 files batched, 501 (1002) added so far); re-opening (prior size: 3286.8 Kb)
+0043.214 (0) backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: size is now: 9.20 Mb
+0043.220 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 1100 files added (on-disk size: 9390.6 Kb)
+0043.224 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 1200 files added (on-disk size: 9390.6 Kb)
+0043.240 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 1300 files added (on-disk size: 9390.6 Kb)
+0043.244 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 1400 files added (on-disk size: 9390.6 Kb)
+0043.248 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 1500 files added (on-disk size: 9390.6 Kb)
+0043.248 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (6.3 Mb, 3731 files batched, 501 (1503) added so far); re-opening (prior size: 9390.6 Kb)
+0061.644 (0) backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: size is now: 11.30 Mb
+0061.650 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 1600 files added (on-disk size: 11546.8 Kb)
+0061.654 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 1700 files added (on-disk size: 11546.8 Kb)
+0061.663 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 1800 files added (on-disk size: 11546.8 Kb)
+0061.666 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 1900 files added (on-disk size: 11546.8 Kb)
+0061.670 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 2000 files added (on-disk size: 11546.8 Kb)
+0061.671 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (8.2 Mb, 3731 files batched, 501 (2004) added so far); re-opening (prior size: 11546.8 Kb)
+0086.119 (0) backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: size is now: 15.80 Mb
+0086.144 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 2100 files added (on-disk size: 16168.9 Kb)
+0086.147 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 2200 files added (on-disk size: 16168.9 Kb)
+0086.151 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 2300 files added (on-disk size: 16168.9 Kb)
+0086.155 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 2400 files added (on-disk size: 16168.9 Kb)
+0086.159 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 2500 files added (on-disk size: 16168.9 Kb)
+0086.160 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (4.1 Mb, 3731 files batched, 501 (2505) added so far); re-opening (prior size: 16168.9 Kb)
+0107.103 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 2600 files added (on-disk size: 17489.4 Kb)
+0107.108 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 2700 files added (on-disk size: 17489.4 Kb)
+0107.112 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 2800 files added (on-disk size: 17489.4 Kb)
+0107.116 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 2900 files added (on-disk size: 17489.4 Kb)
+0107.120 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 3000 files added (on-disk size: 17489.4 Kb)
+0107.121 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (4.5 Mb, 3731 files batched, 501 (3006) added so far); re-opening (prior size: 17489.4 Kb)
+0131.218 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 3100 files added (on-disk size: 19326.7 Kb)
+0131.222 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 3200 files added (on-disk size: 19326.7 Kb)
+0131.226 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 3300 files added (on-disk size: 19326.7 Kb)
+0131.230 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 3400 files added (on-disk size: 19326.7 Kb)
+0131.234 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 3500 files added (on-disk size: 19326.7 Kb)
+0131.235 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (7.2 Mb, 3731 files batched, 501 (3507) added so far); re-opening (prior size: 19326.7 Kb)
+0156.903 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 3600 files added (on-disk size: 21641.1 Kb)
+0156.908 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip.tmp: 3700 files added (on-disk size: 21641.1 Kb)
+0185.731 (0) Created plugins zip (0) - 24813.9 Kb in 185.1 s (134 Kb/s) (SHA1 checksum: 80edf28d656332d0ab3cb8d42b63782cbcc6e83a)
+0185.733 (0) Beginning creation of dump of themes (split every: 800 Mb)
+0185.916 (0) Total entities for the zip file: 50 directories, 539 files, 4.8 Mb
+0185.921 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip.tmp: 100 files added (on-disk size: 0 Kb)
+0185.924 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip.tmp: 200 files added (on-disk size: 0 Kb)
+0185.928 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip.tmp: 300 files added (on-disk size: 0 Kb)
+0185.932 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip.tmp: 400 files added (on-disk size: 0 Kb)
+0185.936 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip.tmp: 500 files added (on-disk size: 0 Kb)
+0185.936 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 500 files added on this batch (4 Mb, 539 files batched, 501 (501) added so far); re-opening (prior size: 0 Kb)
+0192.801 (0) backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip.tmp: size is now: 2.10 Mb
+0196.364 (0) backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip.tmp: size is now: 2.70 Mb
+0196.410 (0) Created themes zip (0) - 2767.1 Kb in 10.5 s (262.5 Kb/s) (SHA1 checksum: ef6699dce6736799d0505c998e28b65aa9f534d8)
+0196.413 (0) Beginning creation of dump of uploads (split every: 800 Mb)
+0196.653 (0) Total entities for the zip file: 57 directories, 315 files, 7 Mb
+0196.658 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip.tmp: 100 files added (on-disk size: 0 Kb)
+0196.662 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip.tmp: 200 files added (on-disk size: 0 Kb)
+0196.666 (0) Zip: backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip.tmp: 300 files added (on-disk size: 0 Kb)
+0209.234 (0) backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip.tmp: size is now: 6.40 Mb
+0209.271 (0) Created uploads zip (0) - 6538.8 Kb in 12.7 s (515.7 Kb/s) (SHA1 checksum: c17a5eee5a51f87dd7ca474ceadbe40d251db16c)
+0209.273 (0) Beginning backup of other directories found in the content directory (index: 0)
+0209.273 (0) Looking for candidates to back up in: /home/national/public_html/nhap.org/wp-content
+0209.274 (0) finding files: uploads: skipping: this is the uploads directory
+0209.274 (0) finding files: mu-plugins: adding to list
+0209.275 (0) finding files: advanced-cache.php: adding to list
+0209.275 (0) finding files: .htaccess.bak: adding to list
+0209.276 (0) finding files: upgrade: skipping: excluded by options
+0209.276 (0) finding files: cache: skipping: excluded by options
+0209.277 (0) finding files: gallery: adding to list
+0209.277 (0) finding files: themes: skipping: this is the themes directory
+0209.278 (0) finding files: index.php: adding to list
+0209.278 (0) finding files: plugins: skipping: this is the plugins directory
+0209.279 (0) finding files: ewww: adding to list
+0209.279 (0) finding files: languages: adding to list
+0209.280 (0) finding files: mc4wp-custom-styles.css: adding to list
+0209.280 (0) finding files: updraft: skipping: this is the updraft directory
+0209.281 (0) finding files: blogs.dir: adding to list
+0209.459 (0) Total entities for the zip file: 9 directories, 17 files, 3.6 Mb
+0214.648 (0) backup_2013-12-30-1642_NHA_8e652fb46595-others.zip.tmp: size is now: 1.60 Mb
+0214.667 (0) Created others zip (0) - 1623.2 Kb in 5.2 s (310 Kb/s) (SHA1 checksum: 2e9f736744e7044cb82a1c8af2e634957c5a91dc)
+0214.671 (0) Saving backup status to database (elements: 8)
+0214.674 (0) Beginning creation of database dump
+0214.676 (0) Testing: /usr/bin/mysqldump
+0215.965 (0) Working binary mysqldump found: /usr/bin/mysqldump
+0215.972 (0) Table wp_options: Total expected rows (approximate): 661
+0216.090 (0) Table wp_options: Total rows added: 660 in 0.12 seconds
+0216.091 (0) Table wp_options: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_options.table.gz - 112 Kb)
+0216.136 (0) Table wp_users: Total expected rows (approximate): 1363
+0216.254 (0) Table wp_users: Total rows added: 1363 in 0.12 seconds
+0216.255 (0) Table wp_users: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_users.table.gz - 64 Kb)
+0216.278 (0) Table wp_usermeta: Total expected rows (approximate): 25718
+0216.490 (0) Table wp_usermeta: binary mysqldump finished (writes: 33) in 0.21 seconds
+0216.505 (0) Table wp_usermeta: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_usermeta.table.gz - 176 Kb)
+0216.509 (0) Table wp_commentmeta: Total expected rows (approximate): 0
+0216.520 (0) Table wp_commentmeta: Total rows added: 0 in 0.00 seconds
+0216.521 (0) Table wp_commentmeta: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_commentmeta.table.gz - 0 Kb)
+0216.525 (0) Table wp_comments: Total expected rows (approximate): 0
+0216.527 (0) Table wp_comments: Total rows added: 0 in 0.00 seconds
+0216.528 (0) Table wp_comments: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_comments.table.gz - 0 Kb)
+0216.532 (0) Table wp_links: Total expected rows (approximate): 0
+0216.534 (0) Table wp_links: Total rows added: 0 in 0.00 seconds
+0216.535 (0) Table wp_links: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_links.table.gz - 0 Kb)
+0216.545 (0) Table wp_postmeta: Total expected rows (approximate): 4557
+0216.662 (0) Table wp_postmeta: Total rows added: 4557 in 0.12 seconds
+0216.663 (0) Table wp_postmeta: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_postmeta.table.gz - 16 Kb)
+0216.694 (0) Table wp_posts: Total expected rows (approximate): 1288
+0217.160 (0) Table wp_posts: Total rows added: 1288 in 0.47 seconds
+0217.161 (0) Table wp_posts: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_posts.table.gz - 384 Kb)
+0217.177 (0) Table wp_term_relationships: Total expected rows (approximate): 445
+0217.188 (0) Table wp_term_relationships: Total rows added: 445 in 0.01 seconds
+0217.189 (0) Table wp_term_relationships: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_term_relationships.table.gz - 0 Kb)
+0217.199 (0) Table wp_term_taxonomy: Total expected rows (approximate): 30
+0217.204 (0) Table wp_term_taxonomy: Total rows added: 30 in 0.00 seconds
+0217.205 (0) Table wp_term_taxonomy: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_term_taxonomy.table.gz - 0 Kb)
+0217.209 (0) Table wp_terms: Total expected rows (approximate): 28
+0217.213 (0) Table wp_terms: Total rows added: 28 in 0.00 seconds
+0217.214 (0) Table wp_terms: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_terms.table.gz - 0 Kb)
+0217.219 (0) Table wp_collaboration: Total expected rows (approximate): 1
+0217.221 (0) Table wp_collaboration: Total rows added: 1 in 0.00 seconds
+0217.222 (0) Table wp_collaboration: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_collaboration.table.gz - 0 Kb)
+0217.227 (0) Table wp_collabrules: Total expected rows (approximate): 0
+0217.230 (0) Table wp_collabrules: Total rows added: 0 in 0.00 seconds
+0217.231 (0) Table wp_collabrules: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_collabrules.table.gz - 0 Kb)
+0217.235 (0) Table wp_collabwriters: Total expected rows (approximate): 0
+0217.237 (0) Table wp_collabwriters: Total rows added: 0 in 0.00 seconds
+0217.238 (0) Table wp_collabwriters: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_collabwriters.table.gz - 0 Kb)
+0217.243 (0) Table wp_duplicator: Total expected rows (approximate): 1
+0217.249 (0) Table wp_duplicator: Total rows added: 1 in 0.01 seconds
+0217.250 (0) Table wp_duplicator: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_duplicator.table.gz - 0 Kb)
+0217.253 (0) Table wp_ewwwio_images: Total expected rows (approximate): 563
+0217.285 (0) Table wp_ewwwio_images: Total rows added: 563 in 0.03 seconds
+0217.286 (0) Table wp_ewwwio_images: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_ewwwio_images.table.gz - 0 Kb)
+0217.290 (0) Table wp_mc4wp_log: Total expected rows (approximate): 84
+0217.315 (0) Table wp_mc4wp_log: Total rows added: 84 in 0.02 seconds
+0217.316 (0) Table wp_mc4wp_log: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_mc4wp_log.table.gz - 0 Kb)
+0217.320 (0) Table wp_my_calendar: Total expected rows (approximate): 2
+0217.325 (0) Table wp_my_calendar: Total rows added: 2 in 0.00 seconds
+0217.326 (0) Table wp_my_calendar: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_my_calendar.table.gz - 0 Kb)
+0217.330 (0) Table wp_my_calendar_categories: Total expected rows (approximate): 1
+0217.332 (0) Table wp_my_calendar_categories: Total rows added: 1 in 0.00 seconds
+0217.333 (0) Table wp_my_calendar_categories: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_my_calendar_categories.table.gz - 0 Kb)
+0217.337 (0) Table wp_my_calendar_events: Total expected rows (approximate): 2
+0217.339 (0) Table wp_my_calendar_events: Total rows added: 2 in 0.00 seconds
+0217.340 (0) Table wp_my_calendar_events: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_my_calendar_events.table.gz - 0 Kb)
+0217.344 (0) Table wp_my_calendar_locations: Total expected rows (approximate): 0
+0217.347 (0) Table wp_my_calendar_locations: Total rows added: 0 in 0.00 seconds
+0217.348 (0) Table wp_my_calendar_locations: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_my_calendar_locations.table.gz - 0 Kb)
+0217.351 (0) Table wp_ngg_album: Total expected rows (approximate): 0
+0217.353 (0) Table wp_ngg_album: Total rows added: 0 in 0.00 seconds
+0217.354 (0) Table wp_ngg_album: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_ngg_album.table.gz - 0 Kb)
+0217.358 (0) Table wp_ngg_gallery: Total expected rows (approximate): 0
+0217.361 (0) Table wp_ngg_gallery: Total rows added: 0 in 0.00 seconds
+0217.362 (0) Table wp_ngg_gallery: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_ngg_gallery.table.gz - 0 Kb)
+0217.367 (0) Table wp_ngg_pictures: Total expected rows (approximate): 0
+0217.370 (0) Table wp_ngg_pictures: Total rows added: 0 in 0.00 seconds
+0217.371 (0) Table wp_ngg_pictures: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_ngg_pictures.table.gz - 0 Kb)
+0217.375 (0) Table wp_q2w3_post_order: Total expected rows (approximate): 1
+0217.377 (0) Table wp_q2w3_post_order: Total rows added: 1 in 0.00 seconds
+0217.378 (0) Table wp_q2w3_post_order: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_q2w3_post_order.table.gz - 0 Kb)
+0217.381 (0) Table wp_smart_donations_campaign_table: Total expected rows (approximate): 0
+0217.384 (0) Table wp_smart_donations_campaign_table: Total rows added: 0 in 0.00 seconds
+0217.384 (0) Table wp_smart_donations_campaign_table: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_smart_donations_campaign_table.table.gz - 0 Kb)
+0217.388 (0) Table wp_smart_donations_donation_item: Total expected rows (approximate): 2
+0217.391 (0) Table wp_smart_donations_donation_item: Total rows added: 2 in 0.00 seconds
+0217.392 (0) Table wp_smart_donations_donation_item: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_smart_donations_donation_item.table.gz - 0 Kb)
+0217.395 (0) Table wp_smart_donations_progress_table: Total expected rows (approximate): 0
+0217.397 (0) Table wp_smart_donations_progress_table: Total rows added: 0 in 0.00 seconds
+0217.398 (0) Table wp_smart_donations_progress_table: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_smart_donations_progress_table.table.gz - 0 Kb)
+0217.403 (0) Table wp_smart_donations_transaction_table: Total expected rows (approximate): 0
+0217.405 (0) Table wp_smart_donations_transaction_table: Total rows added: 0 in 0.00 seconds
+0217.406 (0) Table wp_smart_donations_transaction_table: finishing file (backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_smart_donations_transaction_table.table.gz - 0 Kb)
+0217.409 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_options.table.gz (1/29): adding to final database dump
+0217.495 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_users.table.gz (2/29): adding to final database dump
+0217.604 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_usermeta.table.gz (3/29): adding to final database dump
+0217.788 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_commentmeta.table.gz (4/29): adding to final database dump
+0217.789 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_comments.table.gz (5/29): adding to final database dump
+0217.790 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_links.table.gz (6/29): adding to final database dump
+0217.791 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_postmeta.table.gz (7/29): adding to final database dump
+0217.835 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_posts.table.gz (8/29): adding to final database dump
+0218.230 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_term_relationships.table.gz (9/29): adding to final database dump
+0218.245 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_term_taxonomy.table.gz (10/29): adding to final database dump
+0218.248 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_terms.table.gz (11/29): adding to final database dump
+0218.250 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_collaboration.table.gz (12/29): adding to final database dump
+0218.251 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_collabrules.table.gz (13/29): adding to final database dump
+0218.252 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_collabwriters.table.gz (14/29): adding to final database dump
+0218.253 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_duplicator.table.gz (15/29): adding to final database dump
+0218.255 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_ewwwio_images.table.gz (16/29): adding to final database dump
+0218.264 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_mc4wp_log.table.gz (17/29): adding to final database dump
+0218.268 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_my_calendar.table.gz (18/29): adding to final database dump
+0218.269 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_my_calendar_categories.table.gz (19/29): adding to final database dump
+0218.297 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_my_calendar_events.table.gz (20/29): adding to final database dump
+0218.298 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_my_calendar_locations.table.gz (21/29): adding to final database dump
+0218.298 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_ngg_album.table.gz (22/29): adding to final database dump
+0218.299 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_ngg_gallery.table.gz (23/29): adding to final database dump
+0218.300 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_ngg_pictures.table.gz (24/29): adding to final database dump
+0218.300 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_q2w3_post_order.table.gz (25/29): adding to final database dump
+0218.301 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_smart_donations_campaign_table.table.gz (26/29): adding to final database dump
+0218.302 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_smart_donations_donation_item.table.gz (27/29): adding to final database dump
+0218.303 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_smart_donations_progress_table.table.gz (28/29): adding to final database dump
+0218.303 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db-table-wp_smart_donations_transaction_table.table.gz (29/29): adding to final database dump
+0218.304 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db.gz: finished writing out complete database file (880 Kb)
+0218.329 (0) Total database tables backed up: 29 (backup_2013-12-30-1642_NHA_8e652fb46595-db.gz: checksum (SHA1): 3003a67c445e4e1e6b1e9bd1a14fb9299b9ddce5)
+0218.330 (0) Saving backup history
+0218.334 (0) backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+0218.335 (0) backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+0218.335 (0) backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+0218.336 (0) backup_2013-12-30-1642_NHA_8e652fb46595-others.zip: others: This file has not yet been successfully uploaded: will queue
+0218.337 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db.gz: db: This file has not yet been successfully uploaded: will queue
+0218.340 (0) Requesting upload of the files that have not yet been successfully uploaded (5)
+0218.342 (0) Cloud backup selection: googledrive
+0218.343 (0) Beginning dispatch of backup to remote (googledrive)
+0218.344 (0) Google Drive: requesting access token: client_id=1071312742469.apps.googleusercontent.com
+0218.528 (0) Google Drive: successfully obtained access token
+0218.829 (0) Google Drive quota usage: used=7704.9 Mb, total=36864 Mb, available=29159.1 Mb
+0218.830 (0) backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip: Attempting to upload to Google Drive
+0218.831 (0) backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip: Attempting to upload file to Google Drive.
+0219.322 (0) Uploading file with title backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip
+0219.324 (0) Googledrive chunked upload: 0 % uploaded (URL: https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0q4bVO6q8B8VFVUZmpFU0V1YWs/contents?convert=false&upload_id=AEnB2Up3Y86ZiIIIZTuavSDFbuNBqvhFcRXXBK3GXNNVJ7OOKMWRBYYWHaZ-eUlNdCElehku_GcEl1qH1dNN9xz0TIyczTccnw)
+0219.655 (0) Googledrive chunked upload: 2 % uploaded
+0219.794 (0) Googledrive chunked upload: 4 % uploaded
+0219.954 (0) Googledrive chunked upload: 6 % uploaded
+0220.176 (0) Googledrive chunked upload: 8 % uploaded
+0220.341 (0) Googledrive chunked upload: 10 % uploaded
+0220.511 (0) Googledrive chunked upload: 12 % uploaded
+0220.687 (0) Googledrive chunked upload: 14 % uploaded
+0220.855 (0) Googledrive chunked upload: 16 % uploaded
+0221.067 (0) Googledrive chunked upload: 18 % uploaded
+0221.255 (0) Googledrive chunked upload: 20 % uploaded
+0221.448 (0) Googledrive chunked upload: 22 % uploaded
+0221.662 (0) Googledrive chunked upload: 24 % uploaded
+0221.904 (0) Googledrive chunked upload: 26 % uploaded
+0222.136 (0) Googledrive chunked upload: 28 % uploaded
+0222.362 (0) Googledrive chunked upload: 30 % uploaded
+0222.580 (0) Googledrive chunked upload: 33 % uploaded
+0222.717 (0) Googledrive chunked upload: 35 % uploaded
+0222.855 (0) Googledrive chunked upload: 37 % uploaded
+0223.084 (0) Googledrive chunked upload: 39 % uploaded
+0223.215 (0) Googledrive chunked upload: 41 % uploaded (URL: https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0q4bVO6q8B8VFVUZmpFU0V1YWs/contents?convert=false&upload_id=AEnB2Up3Y86ZiIIIZTuavSDFbuNBqvhFcRXXBK3GXNNVJ7OOKMWRBYYWHaZ-eUlNdCElehku_GcEl1qH1dNN9xz0TIyczTccnw)
+0223.344 (0) Googledrive chunked upload: 43 % uploaded
+0223.561 (0) Googledrive chunked upload: 45 % uploaded
+0223.699 (0) Googledrive chunked upload: 47 % uploaded
+0223.839 (0) Googledrive chunked upload: 49 % uploaded
+0224.027 (0) Googledrive chunked upload: 51 % uploaded
+0224.188 (0) Googledrive chunked upload: 53 % uploaded
+0224.332 (0) Googledrive chunked upload: 55 % uploaded
+0224.471 (0) Googledrive chunked upload: 57 % uploaded
+0224.603 (0) Googledrive chunked upload: 59 % uploaded
+0224.733 (0) Googledrive chunked upload: 61 % uploaded
+0224.882 (0) Googledrive chunked upload: 63 % uploaded
+0225.025 (0) Googledrive chunked upload: 66 % uploaded
+0225.160 (0) Googledrive chunked upload: 68 % uploaded
+0225.304 (0) Googledrive chunked upload: 70 % uploaded
+0225.506 (0) Googledrive chunked upload: 72 % uploaded
+0225.651 (0) Googledrive chunked upload: 74 % uploaded
+0225.798 (0) Googledrive chunked upload: 76 % uploaded
+0225.933 (0) Googledrive chunked upload: 78 % uploaded
+0226.065 (0) Googledrive chunked upload: 80 % uploaded
+0226.234 (0) Googledrive chunked upload: 82 % uploaded (URL: https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0q4bVO6q8B8VFVUZmpFU0V1YWs/contents?convert=false&upload_id=AEnB2Up3Y86ZiIIIZTuavSDFbuNBqvhFcRXXBK3GXNNVJ7OOKMWRBYYWHaZ-eUlNdCElehku_GcEl1qH1dNN9xz0TIyczTccnw)
+0226.374 (0) Googledrive chunked upload: 84 % uploaded
+0226.511 (0) Googledrive chunked upload: 86 % uploaded
+0226.646 (0) Googledrive chunked upload: 88 % uploaded
+0226.788 (0) Googledrive chunked upload: 90 % uploaded
+0226.926 (0) Googledrive chunked upload: 92 % uploaded
+0227.071 (0) Googledrive chunked upload: 94 % uploaded
+0227.213 (0) Googledrive chunked upload: 96 % uploaded
+0227.360 (0) Googledrive chunked upload: 99 % uploaded
+0228.212 (0) The file was successfully uploaded to Google Drive in 8.889 seconds at an upload speed of 1 MB/s.
+0228.214 (0) OK: Archive backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip uploaded to Google Drive in 9.38 seconds (id: 0B0q4bVO6q8B8ZmJUci1GcnkwUUk)
+0228.215 (0) Recording as successfully uploaded: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip (42b6e7267ffd2a92f4a9d8ab185166f0)
+0228.220 (0) Stored file<->id correlation in database (backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip <-> 0B0q4bVO6q8B8ZmJUci1GcnkwUUk)
+0228.227 (0) Deleting local file: backup_2013-12-30-1642_NHA_8e652fb46595-plugins.zip: OK
+0228.228 (0) Google Drive quota usage: used=7704.9 Mb, total=36864 Mb, available=29159.1 Mb
+0228.228 (0) backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip: Attempting to upload to Google Drive
+0228.229 (0) backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip: Attempting to upload file to Google Drive.
+0228.411 (0) Uploading file with title backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip
+0228.413 (0) Googledrive chunked upload: 0 % uploaded (URL: https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0q4bVO6q8B8VFVUZmpFU0V1YWs/contents?convert=false&upload_id=AEnB2UqyWzrKKjWfneoI8nBGLueW5pL8Q8JbVsgBflOFXC02A9YZElaK4k42CRfipgp03LRTEOgf3pYG6CSJqPPa1k-xRSBAZQ)
+0228.604 (0) Googledrive chunked upload: 18 % uploaded
+0229.480 (0) Googledrive chunked upload: 37 % uploaded
+0229.623 (0) Googledrive chunked upload: 55 % uploaded
+0229.758 (0) Googledrive chunked upload: 74 % uploaded
+0229.889 (0) Googledrive chunked upload: 92 % uploaded
+0230.535 (0) The file was successfully uploaded to Google Drive in 2.124 seconds at an upload speed of 1 MB/s.
+0230.537 (0) OK: Archive backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip uploaded to Google Drive in 2.31 seconds (id: 0B0q4bVO6q8B8b2NHLXJOSW9DWlE)
+0230.539 (0) Recording as successfully uploaded: backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip (f76d385d5459dc6fc2cac2bd1453d099)
+0230.542 (0) Stored file<->id correlation in database (backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip <-> 0B0q4bVO6q8B8b2NHLXJOSW9DWlE)
+0230.543 (0) Deleting local file: backup_2013-12-30-1642_NHA_8e652fb46595-themes.zip: OK
+0230.544 (0) Google Drive quota usage: used=7704.9 Mb, total=36864 Mb, available=29159.1 Mb
+0230.544 (0) backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip: Attempting to upload to Google Drive
+0230.545 (0) backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip: Attempting to upload file to Google Drive.
+0230.754 (0) Uploading file with title backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip
+0230.756 (0) Googledrive chunked upload: 0 % uploaded (URL: https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0q4bVO6q8B8VFVUZmpFU0V1YWs/contents?convert=false&upload_id=AEnB2UrmHncZHAlipLNwssObuBpjkDrEkQEl5xweEOc73tPC2OFBCPcsrn9kxlBpwfYrr1MtwvwuESrDsfY5T6SwOHbkg29KdQ)
+0230.985 (0) Googledrive chunked upload: 7 % uploaded
+0231.124 (0) Googledrive chunked upload: 15 % uploaded
+0231.263 (0) Googledrive chunked upload: 23 % uploaded
+0231.410 (0) Googledrive chunked upload: 31 % uploaded
+0231.548 (0) Googledrive chunked upload: 39 % uploaded
+0231.686 (0) Googledrive chunked upload: 46 % uploaded
+0231.840 (0) Googledrive chunked upload: 54 % uploaded
+0231.980 (0) Googledrive chunked upload: 62 % uploaded
+0232.112 (0) Googledrive chunked upload: 70 % uploaded
+0232.261 (0) Googledrive chunked upload: 78 % uploaded
+0232.397 (0) Googledrive chunked upload: 86 % uploaded
+0232.541 (0) Googledrive chunked upload: 93 % uploaded
+0233.242 (0) The file was successfully uploaded to Google Drive in 2.488 seconds at an upload speed of 1 MB/s.
+0233.244 (0) OK: Archive backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip uploaded to Google Drive in 2.7 seconds (id: 0B0q4bVO6q8B8cmJyV3Brak9XTGc)
+0233.246 (0) Recording as successfully uploaded: backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip (fe08e9c8cbf850adcdaa7d73b1347c2d)
+0233.250 (0) Stored file<->id correlation in database (backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip <-> 0B0q4bVO6q8B8cmJyV3Brak9XTGc)
+0233.253 (0) Deleting local file: backup_2013-12-30-1642_NHA_8e652fb46595-uploads.zip: OK
+0233.254 (0) Google Drive quota usage: used=7704.9 Mb, total=36864 Mb, available=29159.1 Mb
+0233.255 (0) backup_2013-12-30-1642_NHA_8e652fb46595-others.zip: Attempting to upload to Google Drive
+0233.255 (0) backup_2013-12-30-1642_NHA_8e652fb46595-others.zip: Attempting to upload file to Google Drive.
+0233.443 (0) Uploading file with title backup_2013-12-30-1642_NHA_8e652fb46595-others.zip
+0233.445 (0) Googledrive chunked upload: 0 % uploaded (URL: https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0q4bVO6q8B8VFVUZmpFU0V1YWs/contents?convert=false&upload_id=AEnB2UrlQ1DGt6OmkGyU_CBrke6T9j38Kf9xFqUqtwLe5hWazyKS_pzOZo0iYGuvsufXuznnF_V_F9SX0a--keQoeLla6oJIJw)
+0233.763 (0) Googledrive chunked upload: 31 % uploaded
+0233.907 (0) Googledrive chunked upload: 63 % uploaded
+0234.059 (0) Googledrive chunked upload: 94 % uploaded
+0234.664 (0) The file was successfully uploaded to Google Drive in 1.221 seconds at an upload speed of 1 MB/s.
+0234.666 (0) OK: Archive backup_2013-12-30-1642_NHA_8e652fb46595-others.zip uploaded to Google Drive in 1.41 seconds (id: 0B0q4bVO6q8B8TkVJWGV4Y0R4bzg)
+0234.667 (0) Recording as successfully uploaded: backup_2013-12-30-1642_NHA_8e652fb46595-others.zip (e4b46ba4fecd6ba178c26db21f8e8035)
+0234.671 (0) Stored file<->id correlation in database (backup_2013-12-30-1642_NHA_8e652fb46595-others.zip <-> 0B0q4bVO6q8B8TkVJWGV4Y0R4bzg)
+0234.673 (0) Deleting local file: backup_2013-12-30-1642_NHA_8e652fb46595-others.zip: OK
+0234.673 (0) Google Drive quota usage: used=7704.9 Mb, total=36864 Mb, available=29159.1 Mb
+0234.674 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db.gz: Attempting to upload to Google Drive
+0234.675 (0) backup_2013-12-30-1642_NHA_8e652fb46595-db.gz: Attempting to upload file to Google Drive.
+0234.853 (0) Uploading file with title backup_2013-12-30-1642_NHA_8e652fb46595-db.gz
+0234.855 (0) Googledrive chunked upload: 0 % uploaded (URL: https://docs.google.com/feeds/upload/create-session/default/private/full/folder%3A0B0q4bVO6q8B8VFVUZmpFU0V1YWs/contents?convert=false&upload_id=AEnB2UoAPXNd6WX9wP5TEZf9vZXJc5gEVyqJ1wfg9g8hE5koMOirMvmYSfMUyPvbL0E6s30a-hGMqRmu8NZoJ_MyYzMlAj2Jsg)
+0235.141 (0) Googledrive chunked upload: 57 % uploaded
+0235.964 (0) The file was successfully uploaded to Google Drive in 1.111 seconds at an upload speed of 879 kB/s.
+0235.966 (0) OK: Archive backup_2013-12-30-1642_NHA_8e652fb46595-db.gz uploaded to Google Drive in 1.29 seconds (id: 0B0q4bVO6q8B8cU81NTVoczlOTW8)
+0235.967 (0) Recording as successfully uploaded: backup_2013-12-30-1642_NHA_8e652fb46595-db.gz (c6d37777ce99813b968f999ca7408371)
+0235.970 (0) Stored file<->id correlation in database (backup_2013-12-30-1642_NHA_8e652fb46595-db.gz <-> 0B0q4bVO6q8B8cU81NTVoczlOTW8)
+0235.971 (0) Deleting local file: backup_2013-12-30-1642_NHA_8e652fb46595-db.gz: OK
+0235.973 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=7, retain_db=7
+0235.974 (0) Number of backup sets in history: 8
+0235.975 (0) Examining backup set with datestamp: 1388421771 (Dec 30 2013 16:42:51)
+0235.975 (0) 1388421771: db: this set includes a database (backup_2013-12-30-1642_NHA_8e652fb46595-db.gz); db count is now 1
+0235.977 (0) 1388421771: this backup set remains non-empty (1/1); will retain in history
+0235.977 (0) Examining backup set with datestamp: 1388335882 (Dec 29 2013 16:51:22)
+0235.978 (0) 1388335882: db: this set includes a database (backup_2013-12-29-1651_NHA_d1b8f4f711a4-db.gz); db count is now 2
+0235.979 (0) 1388335882: this backup set remains non-empty (1/1); will retain in history
+0235.980 (0) Examining backup set with datestamp: 1388248973 (Dec 28 2013 16:42:53)
+0235.981 (0) 1388248973: db: this set includes a database (backup_2013-12-28-1642_NHA_d6a68f248236-db.gz); db count is now 3
+0235.982 (0) 1388248973: this backup set remains non-empty (1/1); will retain in history
+0235.983 (0) Examining backup set with datestamp: 1388163738 (Dec 27 2013 17:02:18)
+0235.984 (0) 1388163738: db: this set includes a database (backup_2013-12-27-1702_NHA_b9cb859eeac8-db.gz); db count is now 4
+0235.985 (0) 1388163738: this backup set remains non-empty (1/1); will retain in history
+0235.986 (0) Examining backup set with datestamp: 1388078217 (Dec 26 2013 17:16:57)
+0235.986 (0) 1388078217: db: this set includes a database (backup_2013-12-26-1716_NHA_725e8899887f-db.gz); db count is now 5
+0235.987 (0) 1388078217: this backup set remains non-empty (1/1); will retain in history
+0235.988 (0) Examining backup set with datestamp: 1388003684 (Dec 25 2013 20:34:44)
+0235.989 (0) 1388003684: db: this set includes a database (backup_2013-12-25-2034_NHA_26c776127b68-db.gz); db count is now 6
+0235.990 (0) 1388003684: this backup set remains non-empty (1/1); will retain in history
+0235.990 (0) Examining backup set with datestamp: 1387911787 (Dec 24 2013 19:03:07)
+0235.991 (0) 1387911787: db: this set includes a database (backup_2013-12-24-1903_NHA_fab8595019a1-db.gz); db count is now 7
+0235.992 (0) 1387911787: this backup set remains non-empty (1/1); will retain in history
+0235.993 (0) Examining backup set with datestamp: 1387817011 (Dec 23 2013 16:43:31)
+0235.994 (0) 1387817011: db: this set includes a database (backup_2013-12-23-1643_NHA_c2b2fe2b77eb-db.gz); db count is now 8
+0235.994 (0) 1387817011: db: over retain limit (7); will delete this database
+0235.995 (0) Delete file: backup_2013-12-23-1643_NHA_c2b2fe2b77eb-db.gz, service=googledrive
+0236.382 (0) backup_2013-12-23-1643_NHA_c2b2fe2b77eb-db.gz: Deletion successful
+0236.385 (0) plugins: 1387817011: over retain limit (7); will delete this file (backup_2013-12-23-1643_NHA_c2b2fe2b77eb-plugins.zip)
+0236.385 (0) themes: 1387817011: over retain limit (7); will delete this file (backup_2013-12-23-1643_NHA_c2b2fe2b77eb-themes.zip)
+0236.386 (0) uploads: 1387817011: over retain limit (7); will delete this file (backup_2013-12-23-1643_NHA_c2b2fe2b77eb-uploads.zip)
+0236.386 (0) others: 1387817011: over retain limit (7); will delete this file (backup_2013-12-23-1643_NHA_c2b2fe2b77eb-others.zip)
+0236.387 (0) Delete file: backup_2013-12-23-1643_NHA_c2b2fe2b77eb-plugins.zip, service=googledrive
+0236.387 (0) Delete file: backup_2013-12-23-1643_NHA_c2b2fe2b77eb-themes.zip, service=googledrive
+0236.388 (0) Delete file: backup_2013-12-23-1643_NHA_c2b2fe2b77eb-uploads.zip, service=googledrive
+0236.388 (0) Delete file: backup_2013-12-23-1643_NHA_c2b2fe2b77eb-others.zip, service=googledrive
+0236.794 (0) backup_2013-12-23-1643_NHA_c2b2fe2b77eb-plugins.zip: Deletion successful
+0237.154 (0) backup_2013-12-23-1643_NHA_c2b2fe2b77eb-themes.zip: Deletion successful
+0237.490 (0) backup_2013-12-23-1643_NHA_c2b2fe2b77eb-uploads.zip: Deletion successful
+0238.558 (0) backup_2013-12-23-1643_NHA_c2b2fe2b77eb-others.zip: Deletion successful
+0238.562 (0) 1387817011: this backup set is now empty; will remove from history
+0238.563 (0) 1387817011: deleting log file (log.c2b2fe2b77eb.txt)
+0238.564 (0) Retain: saving new backup history (sets now: 7) and finishing retain operation
+0238.567 (0) Resume backup (8e652fb46595, 0): finish run
+0238.569 (0) Decremented the semaphore (fd) by 1
+0238.570 (0) Semaphore (fd) unlocked
+0238.571 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0238.575 (0) Sending email ('Files and database') report (attachments: 0, size: 0 Kb) to: peter...
+0238.671 (0) The backup apparently succeeded and is now complete

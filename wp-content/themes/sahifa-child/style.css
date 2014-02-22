@@ -1,0 +1,189 @@
+/*
+ Theme Name:    NHAP
+ Description:   Official NHAP theme based on Sahifa
+ Author:        Peter Bamford
+ Template:      sahifa
+ Version:		4.2.0
+*/
+
+@import url("../sahifa/style.css");
+
+/* Theme customization starts here */
+
+header#theme-header {
+margin-bottom : 0;
+}
+.header-content {
+padding-bottom : 5px;
+padding-top: 5px;
+}
+#main-content {
+margin-top : 0px;
+}
+
+/* S2 Hacks */
+div.s2member-pro-paypal-update-form-billing-method-section {display: none;}
+
+
+/* call to action buttons */
+a.call-to-action {
+display: block;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
+background: #be2a2a;
+padding: 6px 12px;
+text-decoration: none;
+text-align: center;
+margin: 20px auto 10px;
+color: #fff;
+height: 30px;
+line-height: 30px;
+font-size: 18px;
+width: 200px;
+vertical-align: middle;
+cursor: pointer;
+border: none;
+white-space: nowrap;
+font-weight: normal;
+}
+
+a.call-to-action.red {
+background: #be2a2a;
+}
+
+a.call-to-action.blue {
+background: #0072c6;
+}
+
+a.call-to-action.red:hover {
+text-decoration: none;
+color: #fff;
+background: #a32222;
+}
+
+a.call-to-action.blue:hover {
+text-decoration: none;
+color: #fff;
+background: #004477;
+}
+
+.icon {
+text-align: left;
+padding-left: 40px;
+background-repeat:no-repeat;
+background-position: left center;
+}
+
+.icon.events {
+background-image: url(http://www.nhap.org/wp-content/uploads/2013/11/Icon-Events.png);
+}
+
+.icon.volunteer {
+background-image: url(http://www.nhap.org/wp-content/uploads/2013/11/Icon-Volunteer.png);
+}
+
+.icon.memberzone {
+background-image: url(http://www.nhap.org/wp-content/uploads/2013/11/Icon-Member-Zone.png);
+}
+
+.icon.localgroups {
+background-image: url(http://www.nhap.org/wp-content/uploads/2013/11/Icon-Local-Groups.png);
+}
+
+.trans-box {
+background:#0072C6;
+opacity: 0.9;
+filter:alpha(opacity=90);
+position: absolute;
+width: 200px;
+height: 410px;
+margin: -205px 0 0 -100px; 
+left: 50%;
+top:50%;
+padding: 5px 10px;
+color:#fff;
+text-align: center;
+}
+
+.trans-box a , .trans-box a:hover {
+color: #be2a2a;
+}
+
+.trans-box h4 {
+margin-top: 5px;
+}
+
+.trans-box p {
+padding: 2px;
+}
+
+
+/*  mailchimp for wordpress tweaks */
+.mc4wp-form {
+background:#0072C6;
+opacity: 0.9;
+filter:alpha(opacity=90);  /* For IE8 and earlier */
+position: absolute;
+width: 200px;
+height: 410px;
+margin: -205px 0 0 -100px;
+left: 50%;
+top:50%;
+padding: 5px 10px;
+color:#fff;
+text-align: center;
+}
+
+#main-content .mc4wp-form input[type="submit"] {
+display: block;
+padding: 6px 12px;
+margin: 15px auto;
+font-size: 18px;
+font-weight: normal;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+cursor: pointer;
+border: none;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+-o-user-select: none;
+user-select: none;
+box-shadow:none;
+background:#be2a2a;
+text-shadow:none;
+filter: none;
+}
+
+#main-content .mc4wp-form input[type="submit"]:hover {
+background: #a32222;
+}
+#main-content .mc4wp-form p {
+padding: 3px 3px;
+}
+
+#main-content .mc4wp-form a {
+color: #be2a2a;
+}
+
+#main-content .mc4wp-form h4 {
+margin-top: 5px;
+}
+
+div.wpt-header {
+display:none;
+}
+
+div.widget.social-icons-widget {
+margin-bottom: 45px;
+}

@@ -1,0 +1,38 @@
+
+/* form container */
+ .mc4wp-form {
+	display: block; border-color: transparent;
+	border-color: transparent;color: #ffffff !important; text-align: left;}
+
+/* paragraphs */
+ .mc4wp-form p {
+	color: #f4f4f4 !important;}
+
+/* labels */
+ .mc4wp-form label { 
+	margin-bottom: 6px;
+display: block;}
+
+/* fields */
+ .mc4wp-form input[type="text"],  .mc4wp-form input[type="email"],  .mc4wp-form input[type="url"], 
+ .mc4wp-form input[type="tel"],  .mc4wp-form input[type="number"],  .mc4wp-form input[type="date"],  .mc4wp-form select,  .mc4wp-form textarea { 
+	box-sizing:border-box; box-sizing: border-box; -moz-box-sizing: border-box;
+	padding:6px 12px; margin-bottom: 6px;
+width: 100%;line-height: 17px; height: 29px;display: inline-block;}
+
+/* buttons */
+ .mc4wp-form input[type="submit"],  .mc4wp-form button,  .mc4wp-form input[type="button"],  .mc4wp-form input[type="reset"] {
+	text-shadow:none; box-sizing:border-box; box-sizing: border-box; -moz-box-sizing: border-box;
+	padding:6px 12px; cursor: pointer; text-align:center; 
+color: #f7f7f7 !important;display: block;}
+
+ .mc4wp-form input[type="submit"]:hover,  .mc4wp-form button:hover,  .mc4wp-form input[type="button"]:hover,  .mc4wp-form input[type="reset"]:hover {
+}
+
+/* messages */
+ .mc4wp-form .mc4wp-alert{ }
+ .mc4wp-form .mc4wp-success{ 
+	}
+ .mc4wp-form .mc4wp-error{
+	}
+
