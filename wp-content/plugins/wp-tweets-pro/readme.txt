@@ -2,8 +2,8 @@
 Contributors: joedolson
 Donate link: http://www.joedolson.com/donate.php
 Tags: twitter, microblogging, su.pr, bitly, yourls, redirect, shortener, post, links
-Requires at least: 3.4.2
-Tested up to: 3.8.0
+Requires at least: 3.5.1
+Tested up to: 3.8.1
 Stable tag: trunk
 License: GPLv2 or later
 
@@ -21,6 +21,16 @@ WP Tweets PRO adds new features to WP to Twitter, including:
 * Upload media to Twitter
 
 == Changelog ==
+
+= 1.7.0 =
+
+* Set custom Tweets for each reTweet from the post meta panel. [TODO]
+
+= 1.6.3 =
+
+* Change: Default to 'large' image for uploads.
+* New: per-post toggle to disable image uploads on a post-specific basis.
+* Bug fix: If 'large' image size has been removed, automatically switch to an alternate image size.
 
 = 1.6.2 =
 

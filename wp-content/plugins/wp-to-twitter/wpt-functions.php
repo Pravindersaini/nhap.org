@@ -1,7 +1,7 @@
 <?php 
 // This file contains secondary functions supporting WP to Twitter
-// These functions don't perform any WP to Twitter actions, but are sometimes called for when 
-// support for primary functions is lacking.
+// These functions don't perform any WP to Twitter actions, but add 
+// support for primary functions if lacking.
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if ( version_compare( $wp_version,"2.9.3",">" )) {
@@ -12,42 +12,43 @@ if (!class_exists('WP_Http')) {
 	
 function jd_remote_json( $url, $array=true ) {
 	$input = jd_fetch_url( $url );
-	$obj = json_decode($input, $array );
-	try {
-		if (is_null($array)) {
-			switch ( json_last_error() ) {
-				case JSON_ERROR_DEPTH :
-					$msg = ' - Maximum stack depth exceeded';
-					break;
-				case JSON_ERROR_STATE_MISMATCH :
-					$msg = ' - Underflow or the modes mismatch';
-					break;
-				case JSON_ERROR_CTRL_CHAR :
-					$msg = ' - Unexpected control character found';
-					break;
-				case JSON_ERROR_SYNTAX :
-					$msg = ' - Syntax error, malformed JSON';
-					break;
-				case JSON_ERROR_UTF8 :
-					$msg = ' - Malformed UTF-8 characters, possibly incorrectly encoded';
-					break;
-				default :
-					$msg = ' - Unknown error';
-					break;
+	$obj = json_decode( $input, $array );
+	if ( function_exists( 'json_last_error' ) ) { // > PHP 5.3
+		try {
+			if ( is_null( $obj ) ) {
+				switch ( json_last_error() ) {
+					case JSON_ERROR_DEPTH :
+						$msg = ' - Maximum stack depth exceeded';
+						break;
+					case JSON_ERROR_STATE_MISMATCH :
+						$msg = ' - Underflow or the modes mismatch';
+						break;
+					case JSON_ERROR_CTRL_CHAR :
+						$msg = ' - Unexpected control character found';
+						break;
+					case JSON_ERROR_SYNTAX :
+						$msg = ' - Syntax error, malformed JSON';
+						break;
+					case JSON_ERROR_UTF8 :
+						$msg = ' - Malformed UTF-8 characters, possibly incorrectly encoded';
+						break;
+					default :
+						$msg = ' - Unknown error';
+						break;
+				}
+				throw new Exception($msg);
 			}
-			throw new Exception($msg);
+		} catch ( Exception $e ) {
+			return $e -> getMessage();
 		}
-	} catch (Exception $e) {
-		return $e -> getMessage();
-	}	
+	}
 	return $obj;
-	// TODO: some error handling ?
 }			
 
 function is_valid_url( $url ) {
-    if (is_string($url)) {
-		$url = urldecode($url);
-		return preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url);	
+    if ( is_string( $url ) ) {
+		$url = urldecode( $url );
+		return preg_match( '|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url );
 	} else {
 		return false;
 	}
@@ -55,14 +56,14 @@ function is_valid_url( $url ) {
 // Fetch a remote page. Input url, return content
 function jd_fetch_url( $url, $method='GET', $body='', $headers='', $return='body' ) {
 	$request = new WP_Http;
-	$result = $request->request( $url , array( 'method'=>$method, 'body'=>$body, 'headers'=>$headers, 'sslverify'=>false, 'user-agent'=>'WP to Twitter http://www.joedolson.com/articles/wp-to-twitter/' ) );
+	$result = $request->request( $url , array( 'method'=>$method, 'body'=>$body, 'headers'=>$headers, 'sslverify'=>false, 'user-agent'=>'WP to Twitter/http://www.joedolson.com/articles/wp-to-twitter/' ) );
 	// Success?
-	if ( !is_wp_error($result) && isset($result['body']) ) {
+	if ( !is_wp_error( $result ) && isset( $result['body'] ) ) {
 		if ( $result['response']['code'] == 200 ) {
-			if ($return == 'body') {
-			return $result['body'];
+			if ( $return == 'body' ) {
+				return $result['body'];
 			} else {
-			return $result;
+				return $result;
 			}
 		} else {
 			return $result['response']['code'];

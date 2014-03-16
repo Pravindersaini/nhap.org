@@ -3,11 +3,11 @@
 Plugin Name: WP Tweets PRO
 Plugin URI: http://www.joedolson.com/articles/wp-tweets-pro/
 Description: Adds great new features to extend WP to Twitter. 
-Version: 1.6.2
+Version: 1.6.3
 Author: Joseph Dolson
 Author URI: http://www.joedolson.com/
 */
-/*  Copyright 2012-2013  Joseph C Dolson  (email : wp-to-twitter@joedolson.com)
+/*  Copyright 2012-2014  Joseph C Dolson  (email : wp-to-twitter@joedolson.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ Author URI: http://www.joedolson.com/
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 global $wptp_version;
-$wptp_version = '1.6.2';
+$wptp_version = '1.6.3';
 $plugin_dir = basename(dirname(__FILE__));
 load_plugin_textdomain( 'wp-tweets-pro', false, dirname( plugin_basename( __FILE__ ) ) . '/lang' ); 
 // response to settings updates
@@ -235,7 +235,7 @@ function wpt_insert_post_values( $post, $id ) {
 function wpt_setup_filters() {
 	$filters = get_option('wpt_filters');
 	$available = array( 'postTitle'=>'Post Title','postLink'=>'Permalink','shortUrl'=>'Shortened URL','postStatus'=>'Post Status','postType'=>'Post Type','id'=>'Post ID','authId'=>'Author ID','postExcerpt'=>'Post Excerpt');
-		$return = "<table class='widefat fixed'><thead><tr><th scope='col'>Filter field</th><th scope='col'>Filter type</th><th scope='col'>Filtered value</th><th scope='col'>Delete Filter</th></tr></thead><tbody>";
+	$return = "<table class='widefat fixed'><thead><tr><th scope='col'>Filter field</th><th scope='col'>Filter type</th><th scope='col'>Filtered value</th><th scope='col'>Delete Filter</th></tr></thead><tbody>";
 	if ( is_array( $filters ) ) {
 		foreach ( $filters as $key=>$value ) {
 			$return .= "
@@ -337,7 +337,7 @@ function wpt_get_scheduled_tweets() {
 ?>
 <div class="wrap" id="wp-to-twitter" >
 	<h2><?php _e('Scheduled Tweets from WP Tweets PRO', 'wp-tweets-pro'); ?></h2>
-	<div id="wp-to-twitter" class="postbox-container" style="width: 70%">
+	<div id="wp-to-twitter" class="postbox-container jcd-wide">
 	<div class="metabox-holder">
 	<div class="ui-sortable meta-box-sortables">
 	<div class="postbox">
@@ -367,7 +367,7 @@ function wpt_get_scheduled_tweets() {
 								$rt = $event['args']['rt'];
 								$post_ID = $event['args']['post_id'];
 							}
-							if ( ( isset( $_GET['wpt'] ) && $_GET['wpt'] == 'clear' ) && ( isset($_GET['_wpnonce']) && wp_verify_nonce($_GET['_wpnonce']) ) ) {
+							if ( ( isset( $_GET['wpt'] ) && $_GET['wpt'] == 'clear' ) && ( isset($_GET['_wpnonce']) && 	wp_verify_nonce($_GET['_wpnonce']) ) ) {
 								wp_unschedule_event( $timestamp, 'wpt_schedule_tweet_action', array( 'id'=>$auth,'sentence'=>$sentence, 'rt'=>$rt,'post_id'=>$post_ID ) );
 								echo "<div id='message' class='updated'><p>".sprintf(__('Tweet for %1$s has been deleted.','wp-tweets-pro'),date( $date_format, ($timestamp+$offset) ))."</p></div>";
 							} else if ( isset($_GET['wpt']) && $_GET['wpt'] == 'delete' &&
@@ -379,6 +379,7 @@ function wpt_get_scheduled_tweets() {
 								wp_unschedule_event( $timestamp, 'wpt_schedule_tweet_action', array( 'id'=>$auth,'sentence'=>$sentence,'rt'=>$rt,'post_id'=>$post_ID ) );
 								echo "<div id='message' class='updated'><p>".__('Scheduled Tweet has been deleted.','wp-tweets-pro')."</p></div>";							
 							} else { 
+								$time_diff = human_time_diff( $timestamp+$offset, time()+$offset );							
 								$image = '';
 								if ( get_option( 'wpt_media' ) == 1 && $rt == 0 ) {
 									if ( get_post_meta( $post_ID, '_wpt_image', true ) != 1 ) {
@@ -391,7 +392,7 @@ function wpt_get_scheduled_tweets() {
 								} 
 							?>
 							<tr>
-								<th scope="row"><?php echo date( $date_format, ($timestamp+$offset) ); ?></th>
+								<th scope="row"><?php echo date_i18n( $date_format, ($timestamp+$offset) ); ?><br /><small>(~<?php echo $time_diff; ?>)</small></th>
 								<td><?php echo "$sentence $image"; ?></td>
 								<td><?php if ( !$auth ) { echo '@'.get_option( 'wtt_twitter_username' ); } else { echo '@'.get_user_meta( $auth, 'wtt_twitter_username',true ); } ?></td>
 								<td><?php wpt_tweet_links( $timestamp, $auth, $rt, $post_ID, md5($sentence) ); ?></td>
@@ -443,7 +444,11 @@ function wpt_get_scheduled_tweets() {
 						<select name="alt_author" id="alt_author">
 							<option value="main">'.__('Main site account','wp-tweets-pro').'</option>
 							<option value="false">'.__('Current User\'s account','wp-tweets-pro').'</option>');
-						$users = get_users();
+						$user_query = get_users( array( 'role' => 'subscriber' ) );
+						// This gets the array of ids of the subscribers
+						$subscribers = wp_list_pluck( $user_query, 'ID' );
+						// Now use the exclude parameter to exclude the subscribers
+						$users = get_users( array( 'exclude' => $subscribers ) );						
 						foreach ( $users as $this_user ) {
 							if ( get_user_meta( $this_user->ID, 'wtt_twitter_username',true ) != '' ) {
 								print('<option value="'.$this_user->ID.'">'.$this_user->display_name.'</option>');
@@ -570,7 +575,7 @@ function wpt_get_past_tweets() {
 	?>
 	<div class="wrap" id="wp-to-twitter" >
 	<h2><?php _e('Past Tweets saved by WP Tweets PRO', 'wp-tweets-pro'); ?></h2>
-	<div class="postbox-container" style="width: 70%">
+	<div class="postbox-container jcd-wide">
 	<div class="metabox-holder">
 	<div class="ui-sortable meta-box-sortables">
 	<div class="postbox">
@@ -601,11 +606,7 @@ function wpt_get_past_tweets() {
 				'total' => $num_pages,
 				'current' => $current
 			));
-			echo "<div class='tablenav'>";
-			echo "<div class='tablenav-pages'>";
-			echo $page_links; 
-			echo "</div>";
-			echo "</div>";
+			printf( "<div class='tablenav'><div class='tablenav-pages'>%s</div></div>", $page_links );
 		}
 	?>
 		<table class="widefat fixed" id="wpt">
@@ -687,7 +688,7 @@ function wpt_get_failed_tweets() {
 	<div class="wrap" id="wp-to-twitter" >
 	<h2><?php _e('Failed Tweets from WP Tweets PRO', 'wp-tweets-pro'); ?></h2>
 	<div class="metabox-holder">
-	<div class="postbox-container" style="width:70%">
+	<div class="postbox-container jcd-wide">
 	<div class="ui-sortable meta-box-sortables">
 	<div class="postbox">
 	
@@ -716,11 +717,7 @@ function wpt_get_failed_tweets() {
 				'total' => $num_pages,
 				'current' => $current
 			));
-			echo "<div class='tablenav'>";
-			echo "<div class='tablenav-pages'>";
-			echo $page_links; 
-			echo "</div>";
-			echo "</div>";
+			printf( "<div class='tablenav'><div class='tablenav-pages'>%s</div></div>", $page_links );
 		}
 	?>
 		<table class="widefat fixed" id="wpt">
@@ -910,12 +907,24 @@ function wpt_filter_user_text( $text, $status, $alt=false ) {
 
 add_action('wpt_schedule_tweet_action', 'wpt_schedule_tweet', 10, 4);
 function wpt_schedule_tweet( $id, $sentence, $rt, $post_ID ) {
+	if ( WPT_DEBUG && function_exists( 'wpt_pro_exists' ) ) {
+		wpt_mail( "Scheduled Action Happening: #$id","$sentence, $rt, $post_ID" ); // DEBUG
+	}	
 	// only upload media the first time...
 	$this_rt = apply_filters( 'wpt_upload_media_count', 0 );
 	$media = ( ( get_option( 'wpt_media' ) == '1' ) && ( $rt == $this_rt ) && ( has_post_thumbnail( $post_ID ) || wpt_post_attachment( $post_ID ) ) )? true : false;
 	if ( get_post_meta( $post_ID, '_wpt_image', true ) == 1 ) $media = false;
 	$media = apply_filters( 'wpt_upload_media', $media, $post_ID ); // filter based on post ID
 	$post = jd_doTwitterAPIPost( $sentence, $id, $post_ID, $media );
+}
+
+add_filter( 'wpt_upload_media', 'wpt_filter_upload_media', 10, 2 );
+function wpt_filter_upload_media( $media, $post_ID ) {
+	$skip = get_post_meta( $post_ID, '_wpt_upload_image', true );
+	if ( $skip == 'false' ) {
+		return false;
+	}
+	return $media;
 }
 
 function wpt_schedule_values( $post_id, $display='normal' ) {
@@ -1529,12 +1538,15 @@ function wpt_set_filter_terms( $message, $post ) {
 	return $message;
 }
 
-add_filter( 'wpt_filter_terms', 'wpt_apply_term_filters',10, 2 );
+add_filter( 'wpt_filter_terms', 'wpt_apply_term_filters', 10, 2 );
 function wpt_apply_term_filters( $filter, $args ) {
-	// $filter == true == allowed
-	$term_ids = array();
 	$post_type = ( isset( $args['type'] ) ) ? $args['type'] : false;
 	$post_ID = ( isset( $args['id'] ) ) ? $args['id'] : false;
+	if ( WPT_DEBUG && function_exists( 'wpt_pro_exists' )  ) {
+		wpt_mail(  "3c: Taxonomy limits initiated #$post_ID", print_r( $args ,1 ) );
+	}
+	// $filter == true == allowed
+	$term_ids = array();
 	$filters = get_option( 'wpt_terms' );
 	if ( is_array( $filters ) ) {
 		$filtered_taxonomies = array_keys( $filters );
@@ -1561,6 +1573,9 @@ function wpt_apply_term_filters( $filter, $args ) {
 			}
 		}
 	}
+	if ( WPT_DEBUG && function_exists( 'wpt_pro_exists' )  ) {
+		wpt_mail(  "3d: Taxonomy limits completed - $filter - #$post_ID", print_r( $args , 1 ) );
+	}	
 	return apply_filters( 'wpt_modify_term_filters', $filter, $args );
 }
 
@@ -1580,7 +1595,7 @@ function wpt_list_terms( $post_type, $post_name ) {
 			if ( $count > 500 ) {
 				_e( 'There are more than 500 terms in this taxonomy. Use the <code>wpt_filter_terms</code> filter to apply custom limits on this taxonomy.', 'wp-tweets-pro' );
 			} else {
-				$terms = get_terms( $slug );
+				$terms = get_terms( $slug, array( 'hide_empty'=>false ) );
 				$checked = ( isset( $filter_type[$slug] ) ) ? ' checked="checked"' : '';
 				if ( !$checked ) { $exclude = __('Exclude','wp-tweets-pro'); } else { $exclude = __('Include','wp-tweets-pro'); }
 				$input = "

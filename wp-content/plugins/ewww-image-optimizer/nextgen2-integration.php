@@ -1,5 +1,7 @@
 <?php 
 class ewwwngg {
+	// TODO: restore custom column via filter ngg_manage_images_row
+	// TODO: add action via filter ngg_manage_images_row_actions
 	/* initializes the nextgen integration functions */
 	function ewwwngg() {
 		add_filter('ngg_manage_images_columns', array(&$this, 'ewww_manage_images_columns'));
@@ -15,7 +17,7 @@ class ewwwngg {
 		add_action('wp_ajax_bulk_ngg_filename', array(&$this, 'ewww_ngg_bulk_filename'));
 		add_action('wp_ajax_bulk_ngg_loop', array(&$this, 'ewww_ngg_bulk_loop'));
 		add_action('wp_ajax_bulk_ngg_cleanup', array(&$this, 'ewww_ngg_bulk_cleanup'));
-		add_action('wp_ajax_bulk_ngg_preview', array(&$this, 'ewww_ngg_bulk_preview'));
+//		add_action('wp_ajax_bulk_ngg_preview', array(&$this, 'ewww_ngg_bulk_preview'));
 //		add_action('wp_ajax_ewww_ngg_thumbs', array(&$this, 'ewww_ngg_thumbs_only'));
 		//add_action('ngg_after_new_images_added', array(&$this, 'ewww_ngg_new_thumbs'), 10, 2);
 		register_setting('ewww_image_optimizer_options', 'ewww_image_optimizer_bulk_ngg_resume');
@@ -42,14 +44,19 @@ class ewwwngg {
 		$image_id = $storage->object->_get_image_id($image);
 		$ewww_debug .= "image id: $image_id<br>";
 		// get an array of sizes available for the $image
-		$sizes = $storage->get_image_sizes($image);
+		$sizes = $storage->get_image_sizes();
 		// run the optimizer on the image for each $size
 		foreach ($sizes as $size) {
+			if ( $size === 'full' && ewww_image_optimizer_get_option('ewww_image_optimizer_lossy_skip_full')) {
+				$full_size = true;
+			} else {
+				$full_size = false;
+			} 
 			// get the absolute path
 			$file_path = $storage->get_image_abspath($image, $size);
 			$ewww_debug .= "optimizing (nextgen): $file_path<br>";
 			// optimize the image and grab the results
-			$res = ewww_image_optimizer($file_path, 2, false, false);
+			$res = ewww_image_optimizer($file_path, 2, false, false, $full_size);
 			$ewww_debug .= "results " . $res[1] . "<br>";
 			// only if we're dealing with the full-size original
 			if ($size === 'full') {
@@ -210,6 +217,7 @@ class ewwwngg {
                         echo '<p>' . __('You do not appear to have uploaded any images yet.', EWWW_IMAGE_OPTIMIZER_DOMAIN) . '</p>';
                         return;
                 }
+		ewww_image_optimizer_cloud_verify(false); 
                 ?>
 		<div class="wrap">
                 <div id="icon-upload" class="icon32"></div><h2><?php _e('Bulk Optimize', EWWW_IMAGE_OPTIMIZER_DOMAIN); ?></h2>
@@ -408,7 +416,7 @@ class ewwwngg {
 		// output the results of the optimization
 		printf("<p>" . __('Optimized image:', EWWW_IMAGE_OPTIMIZER_DOMAIN) . " <strong>%s</strong><br>", basename($storage->object->get_image_abspath($image, 'full')));
 		// get an array of sizes available for the $image
-		$sizes = $storage->get_image_sizes($image);
+		$sizes = $storage->get_image_sizes();
 		// run the optimizer on the image for each $size
 		foreach ($sizes as $size) {
 			if ($size === 'full') {

@@ -3,6 +3,7 @@
 function ewww_image_optimizer_bulk_preview() {
 	global $ewww_debug;
 	$ewww_debug .= "<b>ewww_image_optimizer_bulk_preview()</b><br>";
+	ewww_image_optimizer_cloud_verify(false); 
 	// retrieve the attachment IDs that were pre-loaded in the database
 	list($fullsize_count, $unoptimized_count, $resize_count, $unoptimized_resize_count) = ewww_image_optimizer_count_optimized ('media');
 	$upload_import = get_option('ewww_image_optimizer_imported');
@@ -71,16 +72,30 @@ function ewww_image_optimizer_bulk_preview() {
 // retrieve image counts for the bulk process
 function ewww_image_optimizer_count_optimized ($gallery) {
 	global $ewww_debug;
+	global $wpdb;
+	$ewww_debug .= "<b>ewww_image_optimizer_count_optmized()</b><br>";
 	$unoptimized_full = 0;
 	$unoptimized_re = 0;
 	$resize_count = 0;
 	$ewww_debug .= "scanning for $gallery<br>";
+	// retrieve the time when the optimizer starts
+	$started = microtime(true);
 	switch ($gallery) {
 		case 'media':
-			// retrieve the attachment IDs that were pre-loaded in the database
-			$attachments = get_option('ewww_image_optimizer_bulk_attachments');
+			// see if we were given attachment IDs to work with via GET/POST
+		        if (empty($_REQUEST['ids']) && !get_option('ewww_image_optimizer_bulk_resume')) {
+				// retrieve all the image attachment metadata from the database
+				$attachments = $wpdb->get_results("SELECT metas.meta_value FROM $wpdb->postmeta metas INNER JOIN $wpdb->posts posts ON posts.ID = metas.post_id WHERE posts.post_mime_type LIKE '%image%' AND metas.meta_key = '_wp_attachment_metadata'", ARRAY_N);
+			} else {
+				// retrieve the attachment IDs that were pre-loaded in the database
+				$attachments = get_option('ewww_image_optimizer_bulk_attachments');
+			}
 			foreach ($attachments as $attachment) {
-				$meta = wp_get_attachment_metadata( $attachment, true );
+		        	if (empty($_REQUEST['ids']) && ! get_option('ewww_image_optimizer_bulk_resume')) {
+					$meta = unserialize($attachment[0]);
+				} else {
+					$meta = wp_get_attachment_metadata( $attachment, true );
+				}
 				if (empty($meta['ewww_image_optimizer'])) {
 					$unoptimized_full++;
 				}
@@ -88,7 +103,6 @@ function ewww_image_optimizer_count_optimized ($gallery) {
 				if (isset($meta['sizes']) ) {
 					foreach($meta['sizes'] as $size => $data) {
 						$resize_count++;
-						// update the optimization results
 						if (empty($meta['sizes'][$size]['ewww_image_optimizer'])) {
 							$unoptimized_re++;
 						}
@@ -97,24 +111,36 @@ function ewww_image_optimizer_count_optimized ($gallery) {
 			}
 			break;
 		case 'ngg':
-			// retrieve the attachment IDs that were pre-loaded in the database
-			$attachments = get_option('ewww_image_optimizer_bulk_ngg_attachments');
+			if ( empty( $_REQUEST['doaction'] ) && ! get_option( 'ewww_image_optimizer_bulk_ngg_resume' ) ) {
+				$attachments = $wpdb->get_col( "SELECT meta_data FROM $wpdb->nggpictures" );
+			} else {
+				// retrieve the attachment IDs that were pre-loaded in the database
+				$attachments = get_option('ewww_image_optimizer_bulk_ngg_attachments');
+			}
 			// creating the 'registry' object for working with nextgen
 			$registry = C_Component_Registry::get_instance();
 			// creating a database storage object from the 'registry' object
 			$storage  = $registry->get_utility('I_Gallery_Storage');
 			foreach ($attachments as $attachment) {
-				// get an image object
-				$image = $storage->object->_image_mapper->find($attachment);
-				if (empty($image->meta_data['ewww_image_optimizer'])) {
+				if ( empty( $_REQUEST['doaction'] ) && ! get_option( 'ewww_image_optimizer_bulk_ngg_resume' ) ) {
+					$meta = unserialize( $attachment );
+					if ( ! is_array( $meta ) ) {
+						continue;
+					}
+				} else {
+					// get an image object
+					$image = $storage->object->_image_mapper->find($attachment);
+					$meta = $image->meta_data;
+				}
+				if (empty($meta['ewww_image_optimizer'])) {
 						$unoptimized_full++;
 				}
 				// get an array of sizes available for the $image
-				$sizes = $storage->get_image_sizes($image);
+				$sizes = $storage->get_image_sizes();
 				foreach ($sizes as $size) {
 					if ($size !== 'full') {
 						$resize_count++;
-						if (empty($image->meta_data[$size]['ewww_image_optimizer'])) {
+						if (empty($meta[$size]['ewww_image_optimizer'])) {
 							$unoptimized_re++;
 						}
 					}
@@ -122,24 +148,38 @@ function ewww_image_optimizer_count_optimized ($gallery) {
 			}
 			break;
 		case 'flag':
-			//TODO: count 'websizes'
-			// retrieve the attachment IDs that were pre-loaded in the database
-			$attachments = get_option('ewww_image_optimizer_bulk_flag_attachments');
+			// TODO: count 'websizes'
+			if ( empty( $_REQUEST['doaction'] ) && ! get_option( 'ewww_image_optimizer_bulk_flag_resume' ) ) {
+				$attachments = $wpdb->get_col( "SELECT meta_data FROM $wpdb->flagpictures" );
+			} else {
+				// retrieve the attachment IDs that were pre-loaded in the database
+				$attachments = get_option('ewww_image_optimizer_bulk_flag_attachments');
+			}
 			foreach ($attachments as $attachment) {
-				// get the metadata
-				$meta = new flagMeta($attachment);
-				if (empty($meta->image->meta_data['ewww_image_optimizer'])) {
+				if ( empty( $_REQUEST['doaction'] ) && ! get_option( 'ewww_image_optimizer_bulk_flag_resume' ) ) {
+					$meta = unserialize( $attachment );
+					if ( ! is_array( $meta ) ) {
+						continue;
+					}
+				} else {
+					// get the metadata
+					$meta = new flagMeta($attachment);
+					$meta = $meta->image->meta_data;
+				}
+				if (empty($meta['ewww_image_optimizer'])) {
 					$unoptimized_full++;
 				}
-				if (!empty($meta->image->meta_data['thumbnail'])) {
+				if (!empty($meta['thumbnail'])) {
 					$resize_count++;
-					if(empty($meta->image->meta_data['thumbnail']['ewww_image_optimizer'])) {
+					if(empty($meta['thumbnail']['ewww_image_optimizer'])) {
 						$unoptimized_re++;
 					}
 				}
 			}
 			break;
 	}
+	$elapsed = microtime(true) - $started;
+	$ewww_debug .= "counting images took $elapsed seconds<br>";
 	return array(count($attachments), $unoptimized_full, $resize_count, $unoptimized_re);
 }
 
