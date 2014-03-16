@@ -26,7 +26,7 @@ class tie_review_widget extends WP_Widget {
 				echo $before_title;
 			echo $title ;
 			echo $after_title;
-			tie_get_review( 'review-bottom' );
+			echo tie_get_review( 'review-bottom' );
 			echo $after_widget;
 		endif;
 	}

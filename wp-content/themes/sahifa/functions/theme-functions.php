@@ -1440,75 +1440,78 @@ function tie_get_review( $position = "review-top" ){
 	$short_summary = $get_meta['tie_review_total'][0] ;
 	$style = $get_meta['tie_review_style'][0];
 	$total_counter = $score = 0;
-	?>
-	<meta itemprop="datePublished" content="<?php the_time( 'Y-m-d' ); ?>" />
-	<div style="display:none" itemprop="reviewBody"><?php echo strip_tags( get_the_excerpt() ); ?></div>
-	<div class="review-box <?php echo $position; if( $style == 'percentage' ) echo ' review-percentage'; elseif( $style == 'points' ) echo ' review-percentage'; else echo ' review-stars'?>">
-		<h2 class="review-box-header"><?php _e( 'Review Overview' , 'tie' ) ?></h2>
-		<?php
-		if( !empty($criterias) && is_array($criterias) ){
-			foreach( $criterias as $criteria){ 
-			if( $criteria['name'] ){
-				if( $criteria['score'] > 100 ) $criteria['score'] = 100;
-				if( $criteria['score'] < 0 || empty($criteria['score']) || !is_numeric( $criteria['score']) ) $criteria['score'] = 0;
+	$users_rate = $post_description = '';
+	$users_rate = tie_get_user_rate();
+	$post_description = wp_trim_words(  $post->post_content , 100 );
+	if( $style == 'percentage' ) $review_class = ' review-percentage'; elseif( $style == 'points' ) $review_class = ' review-percentage'; else $review_class = ' review-stars';
+	$output = '
+	<meta itemprop="datePublished" content="'. get_the_time( 'Y-m-d' ).'" />
+	<div style="display:none" itemprop="reviewBody">'. strip_shortcodes(htmlspecialchars(strip_tags(( $post_description )))).'</div>
+	<div class="review-box '.$position.$review_class.'">
+		<h2 class="review-box-header">'. __( "Review Overview" , "tie" ) .'</h2>' ;
+
+	if( !empty($criterias) && is_array($criterias) ){
+		foreach( $criterias as $criteria){ 
+		if( $criteria['name'] ){
+			if( $criteria['score'] > 100 ) $criteria['score'] = 100;
+			if( $criteria['score'] < 0 || empty($criteria['score']) || !is_numeric( $criteria['score']) ) $criteria['score'] = 0;
 				
-			$score += $criteria['score'];
-			$total_counter ++;
-		?>
-		<?php if( $style == 'percentage' ): ?>
-		<div class="review-item">
-			<h5><?php echo $criteria['name'] ?> - <?php echo $criteria['score'] ?>%</h5>
-			<span><span style="width:<?php echo $criteria['score'] ?>%"></span></span>
-		</div>
-		<?php elseif( $style == 'points' ):   $point =  $criteria['score']/10; ?>
-		<div class="review-item">
-			<h5><?php echo $criteria['name'] ?> - <?php echo $point ?></h5>
-			<span><span style="width:<?php echo $criteria['score'] ?>%"></span></span>
-		</div>
-		<?php else: ?>
-		<div class="review-item">
-			<h5><?php echo $criteria['name'] ?></h5>
-			<span class="stars-large"><span style="width:<?php echo $criteria['score'] ?>%"></span></span>
-		</div>
-		<?php endif; ?>
-		<?php }
-			}
+		$score += $criteria['score'];
+		$total_counter ++;
+		
+		if( $style == 'percentage' ):
+		$output .= ' <div class="review-item">
+			<h5>'.$criteria['name'] .' - '. $criteria['score'] .'%</h5>
+			<span><span style="width:'. $criteria['score'] .'%"></span></span>
+		</div>';
+		elseif( $style == 'points' ):   $point =  $criteria['score']/10;
+		$output .='<div class="review-item">
+			<h5>'. $criteria['name'] .' - '. $point .'</h5>
+			<span><span style="width:'. $criteria['score'] .'%"></span></span>
+		</div>';
+		else:
+		$output .= '<div class="review-item">
+			<h5>'. $criteria['name'] .'</h5>
+			<span class="stars-large"><span style="width:'. $criteria['score'] .'%"></span></span>
+		</div>';
+		endif;
 		}
+		}
+	}
 		if( !empty( $score ) && !empty( $total_counter ) )
 			$total_score =  $score / $total_counter ;
 
 		if( empty($total_score) ) $total_score = 0;
-		?>
-		<div class="review-summary" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+
+		$output .= '<div class="review-summary" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
 		<meta itemprop="worstRating" content = "1" />
 		<meta itemprop="bestRating" content = "100" />
-		<span class="rating points" style="display:none"><span class="rating points" itemprop="ratingValue"><?php echo round($total_score) ?></span></span>
-		<?php if( $style == 'percentage' ): ?>
-			<div class="review-final-score">
-				<h3><?php echo round($total_score) ?><span>%</span></h3>
-				<h4><?php echo $short_summary; ?></h4>
-			</div>
-		<?php elseif( $style == 'points' ): $total_score = $total_score/10 ; ?>
-			<div class="review-final-score">
-				<h3><?php echo round($total_score,1) ?></h3>
-				<h4><?php echo $short_summary; ?></h4>
-			</div>
-		<?php else: ?>
-			<div class="review-final-score">
-				<span title="<?php echo $short_summary ?>" class="stars-large"><span style="width:<?php echo $total_score ?>%"></span></span>
-				<h4><?php echo $short_summary; ?></h4>
-			</div>
-		<?php endif; ?>
-			<?php if( !empty( $summary ) ){ ?>
-			<div class="review-short-summary" itemprop="description">
-				<p><strong><?php _e( 'Summary :' , 'tie' ) ?> </strong> <?php echo htmlspecialchars_decode($summary); ?></p>
-			</div>
-			<?php } ?>
-		</div>
-		<?php echo tie_get_user_rate(); ?>
-		<span style="display:none" itemprop="reviewRating"><?php echo round($total_score) ?></span>
-	</div>
-	<?php 
+		<span class="rating points" style="display:none"><span class="rating points" itemprop="ratingValue">'. round($total_score) .'</span></span>';
+		if( $style == 'percentage' ):
+			$output .= '<div class="review-final-score">
+				<h3>'. round($total_score) .'<span>%</span></h3>
+				<h4>'.$short_summary.'</h4>
+			</div>';
+		elseif( $style == 'points' ): $total_score = $total_score/10 ;
+			$output .= '<div class="review-final-score">
+				<h3>'. round($total_score,1) .'</h3>
+				<h4>'. $short_summary .'</h4>
+			</div>';
+		else:
+			$output .= '<div class="review-final-score">
+				<span title="'. $short_summary .'" class="stars-large"><span style="width:'. $total_score .'%"></span></span>
+				<h4>'. $short_summary .'</h4>
+			</div>';
+		endif;
+			if( !empty( $summary ) ){
+			$output .= '<div class="review-short-summary" itemprop="description">
+				<p><strong>'. __( "Summary :" , "tie" ) .' </strong> '. htmlspecialchars_decode($summary) .'</p>
+			</div>';
+			}
+		$output .= '</div>'.$users_rate.'
+		<span style="display:none" itemprop="reviewRating">'.round($total_score) .'</span>
+	</div>';
+	return $output ;
 }
 
 

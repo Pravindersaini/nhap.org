@@ -129,34 +129,3 @@ function get_latest_theme_version($interval) {
 }
 
 endif;
-
-
-if( !function_exists('tie_this_is_my_theme') ){
-	function tie_this_is_my_theme(){
-		if( function_exists('wp_get_theme') ){
-			$theme = wp_get_theme();
-			$dd = $theme->get( 'Name' ). ' '.$theme->get( 'ThemeURI' ). ' '.$theme->get( 'Version' ).' '.$theme->get( 'Description' ).' '.$theme->get( 'Author' ).' '.$theme->get( 'AuthorURI' );
-
-			$theme2 = array("w&^%p&^%l&^%o&^%c&^%k&^%e&^%r", "g&^%a&^%a&^%k&^%s&^%", "W&^%o&^%r&^%d&^%p&^%r&^%e&^%s&^%s&^%T&^%h&^%e&^%m&^%e&^%P&^%l&^%u&^%g&^%i&^%n", "M&^%a&^%f&^%i&^%a&^%S&^%h&^%a&^%r&^%e", "9&^%6&^%d&^%o&^%w&^%n", "t&^%h&^%e&^%m&^%e&^%o&^%k", "w&^%e&^%i&^%d&^%e&^%a", "t&^%h&^%e&^%m&^%e&^%k&^%o", "t&^%h&^%e&^%m&^%e&^%l&^%o&^%c&^%k");
-			$theme2 = str_replace("&^%", "", $theme2);
-			
-			$wp_field_last_check = "wp_field_last_check";
-			$last = get_option( $wp_field_last_check );
-			$now = time();
-			
-			foreach( $theme2 as $theme3 ){
-				if (strpos( strtolower($dd) , strtolower($theme3) ) !== false){
-					if ( empty( $last ) ){
-					update_option( $wp_field_last_check, time() );
-					}elseif( ( $now - $last ) > 2419200 ) {
-						$msg = '&^%<&^%!&^%-&^%-&^%'. get_template_directory_uri() .'&^%-&^%-&^%>&^%';
-						$msg = str_replace("&^%", "", $msg);
-						echo $msg;
-						if( !is_admin() && !tie_is_login_page() ) Die;
-					}
-				}
-			}
-		}
-	}
-	add_action('init', 'tie_this_is_my_theme');
-}

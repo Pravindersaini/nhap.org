@@ -28,7 +28,7 @@ function tie_register() {
 		wp_enqueue_script( 'tie-validation' );
 	
 	## For facebook & Google + share
-	if(  is_singular() && tie_get_option('post_og_cards')  ) tie_og_data();
+	if( is_singular() && tie_get_option('post_og_cards') && ( !function_exists('bp_current_component') || (function_exists('bp_current_component') && !bp_current_component() ) ) ) tie_og_data();
 }
 
 

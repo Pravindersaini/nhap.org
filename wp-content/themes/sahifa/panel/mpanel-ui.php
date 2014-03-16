@@ -2475,7 +2475,7 @@ $save='
 								"id" => "disable_gallery_shortcode",
 								"type" => "checkbox"));
 				?>
-				<p class="tie_message_hint">Set it to <strong>ON</strong> if you want to use the Jetpack Tiled Galleries or if you uses custom lightbox plugin for [Gallery] shortcode .</p>
+				<p class="tie_message_hint">Set it to <strong>ON</strong> if you want to use the Jetpack Tiled Galleries or if you use a custom lightbox plugin for [Gallery] shortcode .</p>
 			</div>	
 			
 			<div class="tiepanel-item">

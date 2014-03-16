@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Sahifa 1.3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-10-03 18:07+0200\n"
-"PO-Revision-Date: 2013-10-03 18:07+0200\n"
+"PO-Revision-Date: 2014-03-08 14:37+0200\n"
 "Last-Translator: Fouad Badawy <fouad@mo3aser.com>\n"
 "Language-Team: Tielabs <info@tielabs.com>\n"
 "MIME-Version: 1.0\n"
@@ -11,21 +11,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: gettext;gettext_noop;_e;__\n"
 "X-Poedit-Basepath: .\n"
-"X-Poedit-Language: English\n"
-"X-Poedit-Country: EGYPT\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en_EG\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
-#: ../404.php:6
-#: ../loop.php:3
-#: ../page.php:7
+#: ../404.php:6 ../loop.php:3 ../page.php:7
 msgid "Not Found"
 msgstr "غير موجود !"
 
 #: ../404.php:9
-msgid "Apologies, but the page you requested could not be found. Perhaps searching will help."
+msgid ""
+"Apologies, but the page you requested could not be found. Perhaps searching "
+"will help."
 msgstr "المعذرة ولكن الصفحة المطلوبة غير موجودة .. حاول إستخدام محرك البحث ."
 
 #: ../404.php:13
@@ -68,8 +68,7 @@ msgstr "أرشيف الموقع"
 msgid "Author Archives: %s"
 msgstr "أرشيف الكاتب: %s"
 
-#: ../author.php:12
-#: ../category.php:10
+#: ../author.php:12 ../category.php:10
 msgid "Feed Subscription"
 msgstr "الإشتراك في الخلاصات"
 
@@ -114,8 +113,10 @@ msgid "  on Instagram"
 msgstr "  على  Instagram"
 
 #: ../comments.php:3
-msgid "This post is password protected. Enter the password to view any comments."
-msgstr "هذه التدوينة محمية بكلمة مرور . أدخلها لتتمكن من الإطلاع على التعليقات ."
+msgid ""
+"This post is password protected. Enter the password to view any comments."
+msgstr ""
+"هذه التدوينة محمية بكلمة مرور . أدخلها لتتمكن من الإطلاع على التعليقات ."
 
 #: ../comments.php:12
 msgid "No comments"
@@ -164,8 +165,12 @@ msgstr "يجب عليك <a href=\"%s\">تسجيل الدخول</a> لتتمكن 
 
 #: ../comments.php:58
 #, php-format
-msgid "Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out of this account\">Log out?</a>"
-msgstr "مُسجل الدخول كـ <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"تسجيل الخروج من هذا الحساب\">تسجيل الخروج؟</a>"
+msgid ""
+"Logged in as <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"Log out of "
+"this account\">Log out?</a>"
+msgstr ""
+"مُسجل الدخول كـ <a href=\"%1$s\">%2$s</a>. <a href=\"%3$s\" title=\"تسجيل "
+"الخروج من هذا الحساب\">تسجيل الخروج؟</a>"
 
 #: ../comments.php:59
 msgid "Your email address will not be published."
@@ -208,14 +213,13 @@ msgstr "مقال عشوائي"
 msgid "You can use Homepage builder to build your homepage"
 msgstr "من لوحة تحكم القالب يمكنك تخصيص واجهة الموقع ."
 
-#: ../loop.php:5
-#: ../page.php:9
-msgid "Apologies, but no results were found for the requested archive. Perhaps searching will help find a related post."
+#: ../loop.php:5 ../page.php:9
+msgid ""
+"Apologies, but no results were found for the requested archive. Perhaps "
+"searching will help find a related post."
 msgstr "المعذرة ولكن الصفحة المطلوبة غير موجودة .. حاول إستخدام محرك البحث ."
 
-#: ../loop.php:20
-#: ../loop.php:33
-#: ../loop.php:51
+#: ../loop.php:20 ../loop.php:33 ../loop.php:51
 msgid "Read More &raquo;"
 msgstr "أكمل القراءة &raquo;"
 
@@ -237,8 +241,12 @@ msgid "Nothing Found"
 msgstr "لم يتم العثور على نتائج"
 
 #: ../search.php:23
-msgid "Sorry, but nothing matched your search criteria. Please try again with some different keywords."
-msgstr "المعذرة, ولكن لم يتم العثور على نتائج تطابق كلمة البحث .. حاول البحث بإستخدام كلمات مختلفة ."
+msgid ""
+"Sorry, but nothing matched your search criteria. Please try again with some "
+"different keywords."
+msgstr ""
+"المعذرة, ولكن لم يتم العثور على نتائج تطابق كلمة البحث .. حاول البحث "
+"بإستخدام كلمات مختلفة ."
 
 #: ../single.php:66
 msgid "Tagged with: "
@@ -290,13 +298,11 @@ msgstr "لمشاهدة هذه الصفحة"
 msgid "Permalink to %s"
 msgstr "رابط ثابت لـ %s"
 
-#: ../functions/common-scripts.php:46
-#: ../functions/theme-functions.php:72
+#: ../functions/common-scripts.php:46 ../functions/theme-functions.php:72
 msgid "Go to..."
 msgstr "إذهب إلى ..."
 
-#: ../functions/common-scripts.php:47
-#: ../functions/theme-functions.php:1621
+#: ../functions/common-scripts.php:47 ../functions/theme-functions.php:1621
 #: ../functions/theme-functions.php:1627
 msgid "Your Rating:"
 msgstr "تقييمك:"
@@ -375,23 +381,19 @@ msgstr "لا تقييمات بعد !"
 
 #: ../functions/theme-functions.php:1602
 msgid "Be the first one !"
-msgstr "كم أول المصوتين !"
+msgstr "كن أول المصوتين !"
 
-#: ../functions/theme-functions.php:1621
-#: ../functions/theme-functions.php:1627
+#: ../functions/theme-functions.php:1621 ../functions/theme-functions.php:1627
 #: ../functions/theme-functions.php:1634
 msgid "votes"
 msgstr "أصوات"
 
-#: ../functions/theme-functions.php:1632
-#: ../functions/theme-functions.php:1634
+#: ../functions/theme-functions.php:1632 ../functions/theme-functions.php:1634
 msgid "User Rating:"
 msgstr "تقييم المستخدمين:"
 
-#: ../functions/theme-functions.php:1654
-#: ../functions/theme-functions.php:1661
-#: ../functions/theme-functions.php:1667
-#: ../functions/theme-functions.php:1673
+#: ../functions/theme-functions.php:1654 ../functions/theme-functions.php:1661
+#: ../functions/theme-functions.php:1667 ../functions/theme-functions.php:1673
 msgid "ago"
 msgstr "مضت"
 
@@ -492,8 +494,7 @@ msgstr "&raquo;"
 msgid "&laquo;"
 msgstr "&laquo;"
 
-#: ../includes/pagenavi.php:166
-#: ../includes/pagenavi.php:167
+#: ../includes/pagenavi.php:166 ../includes/pagenavi.php:167
 msgid "..."
 msgstr "..."
 
@@ -515,8 +516,7 @@ msgstr "%s "
 msgid "%1$s at %2$s"
 msgstr "%1$s في %2$s"
 
-#: ../includes/wp_list_comments.php:10
-#: ../includes/wp_list_comments.php:30
+#: ../includes/wp_list_comments.php:10 ../includes/wp_list_comments.php:30
 msgid "(Edit)"
 msgstr "تحرير"
 
@@ -721,7 +721,6 @@ msgstr "مقالات مشابهة"
 #~ msgstr "أنت هنا:"
 
 #~ msgid "One Response to %2$s"
-
 #~ msgid_plural "%1$s Responses to %2$s"
 #~ msgstr[0] "تعليق واحد على %2$s"
 #~ msgstr[1] "%1$s تعليقات على %2$s"

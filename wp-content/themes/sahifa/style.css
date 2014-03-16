@@ -5,7 +5,7 @@
 	Description: A Premium Wordpress News Theme
 	Author: TieLabs
 	Author URI: http://tielabs.com/
-	Version: 4.2.0
+	Version: 4.2.2
 	License: license purchased
 	License URI: http://themeforest.net/licenses/regular_extended
 	
@@ -533,7 +533,9 @@ header#theme-header:after, #signup_form:after, #buddypress:after, #main-nav:afte
 		-moz-box-shadow: 0 5px 3px rgba(0, 0, 0, .1);
 		box-shadow: 0 5px 3px rgba(0, 0, 0, .1);
 	}
+	#main-nav-uber.fixed-nav{top:0;}
 	body.admin-bar .fixed-nav{top:27px;}
+	body.admin-bar #main-nav-uber.fixed-nav{top:32px;}
 
 	#main-nav ul li.mega-menu{position: static;}
 	#main-nav ul li .mega-menu-block ul.sub-menu{

@@ -43,12 +43,12 @@
 
 				<div class="entry">
 					<?php if( ( tie_get_option( 'share_post_top' ) &&  empty( $get_meta["tie_hide_share"][0] ) ) || $get_meta["tie_hide_share"][0] == 'no' ) get_template_part( 'includes/post-share' ); // Get Share Button template ?>
-					<?php if( !empty( $review_position ) && ( $review_position == 'top' || $review_position == 'both'  ) ) tie_get_review('review-top'); ?>
+					<?php if( !empty( $review_position ) && ( $review_position == 'top' || $review_position == 'both'  ) ) echo tie_get_review('review-top'); ?>
 
 					<?php the_content(); ?>
 					<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'tie' ), 'after' => '</div>' ) ); ?>
 					
-					<?php if( !empty( $review_position ) && ( $review_position == 'bottom' || $review_position == 'both' ) ) tie_get_review('review-bottom'); ?>
+					<?php if( !empty( $review_position ) && ( $review_position == 'bottom' || $review_position == 'both' ) ) echo tie_get_review('review-bottom'); ?>
 
 					<?php edit_post_link( __( 'Edit', 'tie' ), '<span class="edit-link">', '</span>' ); ?>
 				</div><!-- .entry /-->

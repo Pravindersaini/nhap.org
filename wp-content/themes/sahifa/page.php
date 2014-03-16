@@ -40,12 +40,12 @@
 				<p class="post-meta"></p>
 				<div class="clear"></div>
 				<div class="entry">
-					<?php if( !empty( $review_position ) && ( $review_position == 'top' || $review_position == 'both'  ) ) tie_get_review('review-top'); ?>
+					<?php if( !empty( $review_position ) && ( $review_position == 'top' || $review_position == 'both'  ) ) echo tie_get_review('review-top'); ?>
 
 					<?php the_content(); ?>
 					<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'tie' ), 'after' => '</div>' ) ); ?>
 					
-					<?php if( !empty( $review_position ) && ( $review_position == 'bottom' || $review_position == 'both' ) ) tie_get_review('review-bottom'); ?>
+					<?php if( !empty( $review_position ) && ( $review_position == 'bottom' || $review_position == 'both' ) ) echo tie_get_review('review-bottom'); ?>
 
 					<?php edit_post_link( __( 'Edit', 'tie' ), '<span class="edit-link">', '</span>' ); ?>
 				</div><!-- .entry /-->	
@@ -67,7 +67,7 @@
 		}
 		?>
 		
-		<?php comments_template( '', true ); ?>
+		<?php if( !function_exists('bp_current_component') || (function_exists('bp_current_component') && !bp_current_component() ) )  comments_template( '', true );  ?>
 	</div><!-- .content -->
 
 <?php get_sidebar(); ?>

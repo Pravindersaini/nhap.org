@@ -467,10 +467,7 @@ add_shortcode('twitter', 'tie_shortcode_twitter');
 
 ## Reviews -------------------------------------------------- #
 function tie_shortcode_review( $atts, $content = null ) {
-	ob_start();
-	tie_get_review( 'review-bottom' );
-	$output = ob_get_contents();
-	ob_end_clean();
+	$output = tie_get_review( 'review-bottom' );
 	return $output; 
 }
 add_shortcode('review', 'tie_shortcode_review');

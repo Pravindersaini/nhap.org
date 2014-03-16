@@ -237,7 +237,7 @@ class tie_counter_widget extends WP_Widget {
 			<input id="<?php echo $this->get_field_id( 'instagram_api' ); ?>" name="<?php echo $this->get_field_name( 'instagram_api' ); ?>" value="<?php if( !empty( $instance['instagram_api'] ) ) echo $instance['instagram_api']; ?>" class="widefat" type="text" />
 			<small>Check <a href="http://themes.tielabs.com/docs/sahifa/index.htm#counter" target="_blank"><strong>Social Counter Documentation</strong></a> for more info .</small>
 		</p>
-
+		<p style="background-color: #ecf7e7;margin: 10px 0;padding: 10px;color: #468847;border: 3px solid #d6e9c6;">Need more Social Networks ... check out our <a href="http://codecanyon.net/item/arqam-retina-responsive-wp-social-counter-plugin/5085289?ref=TieLabs" target="_blank">Arqam Plugin</a> .</p>
 	<?php
 	}
 }
