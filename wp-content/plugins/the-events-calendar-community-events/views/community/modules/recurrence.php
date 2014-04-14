@@ -76,15 +76,14 @@ if ( $post_id ) {
 	<td>
 		<?php $has_recurrences = ( count( get_post_meta( $post_id, '_EventStartDate' ) ) > 1 ) ? true : false; ?>
 		<input type="hidden" name="is_recurring" value="<?php echo (isset($recType) && $recType != "None" && $has_recurrences) ? "true" : "false" ?>" />
-		<input type="hidden" name="recurrence_action" value="" />
 
 		<select name="recurrence[type]">
-			<option data-plural="" value="None" <?php selected( $recType, 'None' ); ?>><?php _e( 'None', 'tribe-events-community' ); ?></option>
-			<option data-single="day" data-plural="days" value="Every Day" <?php selected( $recType, 'Every Day' ); ?>><?php _e( 'Every Day', 'tribe-events-community' ); ?></option>
-			<option data-single="week" data-plural="weeks" value="Every Week" <?php selected( $recType, 'Every Week' ); ?>><?php _e( 'Every Week', 'tribe-events-community' ); ?></option>
-			<option data-single="month" data-plural="months" value="Every Month" <?php selected( $recType, 'Every Month' ); ?>><?php _e( 'Every Month', 'tribe-events-community' ); ?></option>
-			<option data-single="year" data-plural="years" value="Every Year" <?php selected( $recType, 'Every Year' ); ?>><?php _e( 'Every Year', 'tribe-events-community' ); ?></option>
-			<option data-single="event" data-plural="events" value="Custom" <?php selected( $recType, 'Custom' ); ?>><?php _e( 'Custom', 'tribe-events-community' ); ?></option>
+			<option data-plural="" value="None" <?php selected($recType, "None") ?>><?php _e('None','tribe-events-calendar-pro'); ?></option>
+			<option data-single="<?php _e( 'day', 'tribe-events-calendar-pro' ); ?>" data-plural="<?php _e( 'days', 'tribe-events-calendar-pro' ); ?>" value="Every Day" <?php selected($recType, "Every Day") ?>><?php _e('Every Day','tribe-events-calendar-pro'); ?></option>
+			<option data-single="<?php _e( 'week', 'tribe-events-calendar-pro' ); ?>" data-plural="<?php _e( 'weeks', 'tribe-events-calendar-pro' ); ?>" value="Every Week" <?php selected($recType, "Every Week") ?>><?php _e('Every Week','tribe-events-calendar-pro'); ?></option>
+			<option data-single="<?php _e( 'month', 'tribe-events-calendar-pro' ) ?>" data-plural="<?php _e( 'months', 'tribe-events-calendar-pro' ) ?>" value="Every Month" <?php selected($recType, "Every Month") ?>><?php _e('Every Month','tribe-events-calendar-pro'); ?></option>
+			<option data-single="<?php _e( 'year', 'tribe-events-calendar-pro' ) ?>" data-plural="<?php _e( 'years', 'tribe-events-calendar-pro' ) ?>" value="Every Year" <?php selected($recType, "Every Year") ?>><?php _e('Every Year','tribe-events-calendar-pro'); ?></option>
+			<option data-single="<?php _e( 'event', 'tribe-events-calendar-pro' ) ?>" data-plural="<?php _e( 'events', 'tribe-events-calendar-pro' ) ?>" value="Custom" <?php selected($recType, "Custom") ?>><?php _e('Custom','tribe-events-calendar-pro'); ?></option>
 		</select>
 
 		<span id="recurrence-end" style="display: <?php echo !$recType || $recType == 'None' ? 'none' : 'inline' ?>">
@@ -126,9 +125,9 @@ if ( $post_id ) {
 
 		<?php _e( 'Every', 'tribe-events-community' ); ?>
 
-		<input type="text" name="recurrence[custom-interval]" value="<?php esc_attr_e($recCustomInterval); ?>"/> <span id="recurrence-interval-type"><?php echo $recCustomTypeText; ?></span>
-		<input type="hidden" name="recurrence[custom-type-text]" value="<?php esc_attr_e( $recCustomTypeText ); ?>"/>
-		<input type="hidden" name="recurrence[occurrence-count-text]" value="<?php esc_attr_e( $recOccurrenceCountText ); ?>"/>
+		<input type="text" name="recurrence[custom-interval]" value="<?php esc_attr_e( $recCustomInterval, 'tribe-events-calendar' ); ?>"/> <span id="recurrence-interval-type"><?php echo $recCustomTypeText; ?></span>
+		<input type="hidden" name="recurrence[custom-type-text]" value="<?php esc_attr_e( $recCustomTypeText, 'tribe-events-calendar' ); ?>"/>
+		<input type="hidden" name="recurrence[occurrence-count-text]" value="<?php esc_attr_e( $recOccurrenceCountText, 'tribe-events-calendar' ); ?>"/>
 	</td>
 </tr><!-- .recurrence-row -->
 

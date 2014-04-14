@@ -1,11 +1,11 @@
 === The Events Calendar: Community Events ===
 
-Contributors: PaulHughes01, jazbek, jbrinley, roblagatta, shane.pearlman, codearachnid, peterchester, reid.peifer, jonahcoyote, ModernTribe
+Contributors: jazbek, jbrinley, roblagatta, shane.pearlman, ckpicker, peterchester, reid.peifer, jonahcoyote, ModernTribe
 Tags: widget, events, simple, tooltips, grid, month, list, calendar, event, venue, community, registration, api, dates, date, plugin, posts, sidebar, template, theme, time, google maps, google, maps, conference, workshop, concert, meeting, seminar, summit, forum, shortcode, The Events Calendar, The Events Calendar PRO
 Donate link: http://m.tri.be/29
 Requires at least: 3.6
-Tested up to: 3.8
-Stable tag: 3.4
+Tested up to: 3.8.1
+Stable tag: 3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,7 @@ The plugin is produced by <a href="http://m.tri.be/3i">Modern Tribe Inc</a>.
 
 * <a href="http://profiles.wordpress.org/users/jbrinley">Jonathan Brinley</a>
 * <a href="http://profiles.wordpress.org/users/jazbek">Jessica Yazbek</a>
+* <a href="http://profiles.wordpress.org/users/ckpicker”>Casey Picker</a>
 * <a href="http://profiles.wordpress.org/users/roblagatta">Rob La Gatta</a>
 * <a href="http://profiles.wordpress.org/users/peterchester">Peter Chester</a>
 * <a href="http://profiles.wordpress.org/users/reid.peifer">Reid Peifer</a>
@@ -100,16 +101,17 @@ The plugin is produced by <a href="http://m.tri.be/3i">Modern Tribe Inc</a>.
 
 = Translators =
 
-* Brazilian Portuguese from Luiza Libardi
+* Brazilian Portuguese by Emerson Marques
 * Czech from Petr Bastan
+* Dutch by J.F.M. Cornelissen
 * Finnish by Ari-Pekka Koponen
 * French by Bastien BC
-* German by by Dieter Dannecker
+* German by by Oliver Heinrich
 * Italian from Roberto Scano
-* Romanian by Mihai Burcea
-* Spanish from Frank Rondon
+* Romanian by Cosmin Vaman
+* Spanish from Juan Jose Reparaz Sarasola
 
-* Previous translators include H√©ctor Gil Rizo, Jan, Marc Galliath, Jurgen Michiels, Vanessa Bianchi, Marco Infussi, Ali Senhaji, Oliver Heinrich, and Petr Bastan
+* Previous translators include Hector Gil Rizo, Frank Rondon, Mihai Burcea, Jan, Marc Galliath, Jurgen Michiels, Vanessa Bianchi, Marco Infussi, Luiza Libardi, Ali Senhaji, and Petr Bastan
 
 == Add-Ons ==
 
@@ -143,6 +145,20 @@ This upgrade requires The Events Calendar 3.0+
 = IMPORTANT NOTICE =
 
 3.0 is a complete overhaul of the plugin, and as a result we're starting the changelog fresh. For release notes from the 2.x lifecycle, see <a href="http://m.tri.be/k">our 2.x release notes.</a>
+
+= 3.5 =
+
+* Fixed handling of user roles blocked from admin for superadmins on multisite
+* Fixed an issue where borders weren't displaying properly on the WYSIWYG editor (thanks to memeco on the forums for his report here!)
+* Fixed inconsistencies in the event submission form when PRO and Community have different default venues or organizers
+* Updated sanitization filters to allow shortcodes in event descriptions by default (thanks to elmalak on the forum for reporting this!)
+* Fixed broken templates when editing venues and organizers while using the default events template
+* Fixed a variety of untranslatable strings
+* Incorporated updated Romanian translation files, courtesy of Cosmin Vaman
+* Added updated German translation files, courtesy of Oliver Heinrich
+* Added updated Brazilian Portuguese translation files, courtesy of by Emerson Marques
+* Incorporated updated Dutch translation files, courtesy of J.F.M. Cornelissen
+* Incorporated updated Spanish translation files, courtesy of Juan Jose Reparaz Sarasola
 
 = 3.4 =
 

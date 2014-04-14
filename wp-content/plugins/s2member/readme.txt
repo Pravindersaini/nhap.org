@@ -1,7 +1,7 @@
 === s2Member Framework (Member Roles, Capabilities, Membership, PayPal Members) ===
 
-Version: 140105
-Stable tag: 140105
+Version: 140409
+Stable tag: 140409
 
 SSL Compatible: yes
 bbPress® Compatible: yes
@@ -16,12 +16,12 @@ Authorize.Net® Compatible: yes w/s2Member® Pro
 Google® Checkout Compatible: yes w/s2Member® Pro
 ClickBank® Compatible: yes w/s2Member® Pro
 
-Tested up to: 3.8
+Tested up to: 3.9
 Requires at least: 3.3
 
 Copyright: © 2009 WebSharks, Inc.
 License: GNU General Public License v2 or later.
-Contributors: WebSharks, anguz
+Contributors: WebSharks, JasWSInc, anguz, raamdev
 
 Author: s2Member® / WebSharks, Inc.
 Author URI: http://www.s2member.com/
@@ -142,11 +142,54 @@ Released under the terms of the [GNU General Public License](http://www.gnu.org/
 
 == Upgrade Notice ==
 
-= v140105 =
+= v140409 =
 
 (Maintenance Release) Upgrade immediately.
 
 == Changelog ==
+
+= v140409 =
+
+* (s2Member Pro) **s2MOP Shortcode**. A new shortcode is now available for site owners running s2Member Pro: `[s2MOP]`. For further details, please check your Dashboard under: `s2Member ⥱ API / Scripting ⥱ Membership Options Page / Variables`. See also: [this KB article]( http://www.s2member.com/kb/s2mop-shortcode/).
+* (s2Member/s2Member Pro) **Compatibility**. Reviewed by Lead Developer Jason Caldwell for full compatibility against WordPress v3.9. s2Member also remains backward compatible with WP v3.3 - 3.8.
+* (s2Member/s2Member Pro) **Security Review**. Reviewed by Lead Developer Jason Caldwell to look closer at any portions of s2Member which might be impacted by the [OpenSSL Heartbleed bug](http://heartbleed.com/). Please note, the Heartbleed bug is NOT an s2Member bug. It is a bug in the OpenSSL library used by many services across the web. Please see this [GitHub issue](https://github.com/WebSharks/s2Member/issues/90) where Jason posted a few tips for site owners running the s2Member software.
+* (s2Member/s2Member Pro) **s2 MOP Vars**. The format of s2Member's MOP Vars has been updated in this release. Backward compatibility remains for the older formats, so this should not cause any problems for site owners using the older formats provided by previous versions of s2Member. For further details, please check your Dashboard under: `s2Member ⥱ API / Scripting ⥱ Membership Options Page / Variables`.
+* (s2Member/s2Member Pro) **s2 MOP Vars**. s2Member MOP Vars are now an optional feature. It is now possible to disable the additional variables that s2Member appends to the end of your Membership Options Page URL when it redirects a visitor without access to something you've restricted. To configure this new option, please check your Dashboard under: `s2Member ⥱ General Options ⥱ Membership Options Page`.
+* (s2Member/s2Member Pro) **Bug Fix**. Updating core IPN handler to correct a PHP warning `array to string conversion`. A symptom was to see warnings in your PHP error log when using a custom Thank-You page. Fixed in this release.
+* (s2Member/s2Member Pro) **Bug Fix**. Updating the new EOT Time column in the list of WP Users so it displays a human readable date and time; as opposed to a UNIX timestamp. Fixed in this release.
+
+= v140328 =
+
+* (s2Member/s2Member Pro) **Compatibility**. Updated to support WordPress v3.9. Nothing significant, just minor UI tweaks to make s2Member fully compatible with WP v3.9.
+* (s2Member) **Compatibility**. Updating for backward compatibility with WordPress v3.8 - 3.3 by tweaking calls to `get_post()`. See this [commit](https://github.com/WebSharks/s2Member/commit/7b8c8aecc3e8d0d0bada3e80f41615b968a763f8) for further details.
+* (s2Member/s2Member Pro) **Translations**. Updating the `includes/translations/s2member.pot` [file](https://github.com/WebSharks/s2Member/tree/000000-dev/s2member/includes/translations) to include the entire set of translation strings for both s2Member and s2Member Pro. Some translation entries from JS files were missing in the previous release due to a glitch in our WP i18n processor. Fixed in this release.
+* (s2Member) **Server Check Tool**. Updating the [s2Member Server Scanner](https://www.s2member.com/kb/server-scanner/) to exclude checksum validations against README files. This release includes other scanning improvements also, which allow the tool to do a better job of scanning for compatibility issues.
+* (s2Member Pro) **GetResponse Integration**. This release adds support for GetResponse™ as an email service provider. s2Member now comes preintegrated with GetResponse™ (requires s2Member Pro), MailChimp® and AWeber™ too.
+* (s2Member) **Double Opt-In Article**. Updating inline documentation to include further details about Double Opt-Ins via [this KB article](http://www.s2member.com/kb/double-opt-in-checkbox/).
+* (s2Member) **Compatibility**. Adding support for `$_SERVER['WP_DIR']` (to help developers with a particular edge case). For further details please see [this GitHub issue](https://github.com/WebSharks/s2Member/issues/39).
+* (s2Member) **Auto-EOT Time Column**. This release adds an Auto-EOT Time column to the list of Users in the WordPress Dashboard. Note: it is possible to show/hide specific columns with the Screen Options tab in WordPress.
+* (s2Member) **HTML Trimming**. Adding a new utility method to the s2Member codebase. This [method](https://github.com/WebSharks/s2Member/commit/aa19d23511e9c34a5cc00628285107da9a565594) helps cleanup HTML-based whitespace (and extra line breaks) that are injected inadvertently by some themes when site owners use the `[s2If]` shortcode.
+* (s2Member) **Bug Fix**. Fixing an issue related to Login Redirections over SSL. For further details please see [this GitHub issue](https://github.com/WebSharks/s2Member/issues/59).
+* (s2Member) **All Custom Capabilities**. If your site offers many different CCAPS (Custom Capabilities) and you'd like a way to sell someone access to all of them at once (without needing to list each of them one-by-one); this is now possible. This is accomplished by selling a customer the special CCAP `all_ccaps`. If the `current_user_can('access_s2member_ccap_all_ccaps')`, they will be granted access to ALL Custom Capabilities that you've implemented on the site (now, and in the future). For instance, if the `current_user_can('access_s2member_ccap_all_ccaps')` they can also `access_s2member_ccap_music` even if they don't actually have CCAP `music`. In short, `all_ccaps` grants a customer access to all CCAPS automatically.
+* (s2Member) **E_NOTICE**. Updating several areas of the s2Member codebase in an ongoing effort to make s2Member behave as expected when running in `WP_DEBUG` mode. Note that `WP_DEBUG` is NOT recommended for a production site (this mode is reserved for developers only please).
+* (s2Member) **Bug Fix**. Fixing a bug related to redirections over SSL in an edge case. See [this GitHub commit](https://github.com/WebSharks/s2Member/commit/881a8f513ff00d1932f33928c771cab38ab84dc7) if you'd like further details.
+* (s2Member) **Bug Fix**. Fixing a bug in the way s2Member handles IP Restrictions in one particular area of the source code. See [this GitHub issue](https://github.com/WebSharks/s2Member/issues/63) if you'd like further details.
+* (s2Member) **File Downloads (Content-Encoding)**. Adding a new configurable option for site owners that use protected File Downloads with s2Member. There is a known issue on some hosting platforms; and this new configurable option provides a workaround that is related to the `Content-Encoding` header. Please see: `Dashboard ⥱ s2Member ⥱ Download Options ⥱ Preventing GZIP Conflicts` to configure this new setting. See also [this GitHub issue](https://github.com/WebSharks/s2Member/issues/70) if you'd like further details.
+* (s2Member) **Apache Compatibility**. Updating s2Member's `.htaccess` files to provide support for the `Require` directive supplied by the `authz_core_module` in the most recent versions of Apache. s2Member also maintains backward compatibility for the `allow/deny` directives used in previous versions of Apache.
+* (s2Member Pro) **Gateway-Specific Variables**. Adding gateway-specific variables for use in email templates configured with s2Member. For further details please see [this GitHub issue](https://github.com/WebSharks/s2Member/issues/25).
+* (s2Member) **Cosmetics**. Updating s2Member's adminitrative menu pages to enhance their appearance in the most recent versions of WordPress. Nothing significant, just minor tweaks.
+* (s2Member Pro) **PayPal IPNs**. Adding support for `txn_type` values: `merch_pmt`, `mp_signup`, and `mp_cancel` to enhance s2Member's support for Billing Agreements when integrated together with a PayPal Pro (Payflow Edition) account that processes Express Checkout transactions. This also resolves a bug related to cancellation IPN processing in a specific scenario. Fixed in this release.
+* (s2Member Pro) **[s2If][else]**. Requires s2Member Pro. This release adds support for a new `[else]` condition when using the `[s2If]` shortcode to protect parts of your content. For examples, please see: `Dashboard ⥱ s2Member ⥱ API Scripting ⥱ Simple Shortcode Conditionals`. See also: `Dashboard ⥱ s2Member ⥱ Restriction Options ⥱ Simple Shortcode Conditionals`.
+* (s2Member Pro) **[s2If php=""]**. Requires s2Member Pro. This release adds support for a new `php` Shortcode Attribute; e.g. `[s2If php=""]`. This makes it possible to use arbitrary PHP code in your `[s2If]` shortcodes. For examples, please see: `Dashboard ⥱ s2Member ⥱ API Scripting ⥱ Simple Shortcode Conditionals`. **Note: this feature is disabled by default.** You must enable the `php` attribute for this to work as expected. Please see: `Dashboard ⥱ s2Member ⥱ Restriction Options ⥱ Simple Shortcode Conditionals` (with s2Member Pro installed).
+* (s2Member) **Bug Fix**. Correcting an issue related to Login Redirections and an E_NOTICE. Please see [this GitHub issue](https://github.com/WebSharks/s2Member/issues/75) if you'd like further details.
+* (s2Member Pro) **[s2Drip]**. Requires s2Member Pro. This release adds support for a new easy-to-use shortcode that can drip content to paying Members based on their Membership Level. For examples, please see: `Dashboard ⥱ s2Member ⥱ API Scripting ⥱ Content Dripping`.
+* (s2Member Pro) **ClickBank**. Adding support for the `vtid` parameter in ClickBank Button Shortcodes. See [this GitHub issue](https://github.com/WebSharks/s2Member/issues/44) if you'd like further details.
+* (s2Member Pro) **PayPal Express Checkout**. Updating PayPal Express Checkout cancellation links so they will automatically use the PayPal Merchant ID supplied by a site owner (i.e. PayPal's recommended behavior). If you'd like further details please see [this GitHub commit](https://github.com/WebSharks/s2Member-Pro/commit/5efbe35eed352868a956c94e51ab09f8e561892a).
+* (s2Member Pro) **Pro Forms**. Adding a new filter for developers `s2member_pro_cancels_old_rp_before_new_rp`. This is true by default. If you'd like to prevent s2Member from terminating an existing Recurring Profile (before creating a new one); i.e. during an upgrade... you can set this to a FALSE value. Not recommended, but there are a few edge cases where it could be helpful for developers. See also [this GitHub commit](https://github.com/WebSharks/s2Member-Pro/commit/19a84c81070bb0e1869b5dbd9d0325cc458fd016).
+* (s2Member Pro) **ClickBank Bug Fix**. Adding support for alphabetics in ClickBank Item Numbers. This bug impacted the ClickBank Button Generator only, it did not prevent alphabetics from being used in a raw Shortcode. Still, this has been resolved now. See also [this GitHub issue](https://github.com/WebSharks/s2Member/issues/46).
+* (s2Member Pro) **PayPal Mobile Bug Fix**. This release corrects a bug related to the `MAXAMT` PayPal specification that is sent via Express Checkout on a mobile device. A symptom of this bug was to sometimes see PayPal's awkward default amount of `$25` when completing checkout on a mobile device. Fixed in this release.
+* (s2Member Pro) **PayPal Express Checkout**. This release addresses an issue where a customer reaches PayPal.com with an item description that inadequately reads "Future payment" (i.e. missing the description provided by a site owner). PayPal's latest improvements have made it possible for s2Member to get this right. Resolved in this release.
+* (s2Member/s2Member Pro) **Partial Refunds**. This release adds support for Partial Refunds in the s2Member EOT Behavior Options. See also [this GitHub issue](https://github.com/WebSharks/s2Member/issues/40).
 
 = v140105 =
 

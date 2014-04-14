@@ -290,7 +290,7 @@ if (!class_exists ("c_ws_plugin__s2member_pro_menu_page_authnet_ops"))
 
 						echo (!is_multisite () || !c_ws_plugin__s2member_utils_conds::is_multisite_farm () || is_main_site ()) ?
 							'<div class="ws-menu-page-hr"></div>' . "\n".
-							'<p style="margin:0;"><strong>PHP Code:</strong> It is also possible to use PHP tags — optional (for developers). If you use PHP tags, please run a test email with <code>&lt;?php print_r(get_defined_vars()); ?&gt;</code>. This will give you a full list of all PHP variables available to you in this email. The <code>$paypal</code> variable is the most important one. It contains all of the <code>$_POST</code> variables received from your Pro Form integration (related to the transaction itself); which are then translated into a format that s2Member\'s Core PayPal Processor can understand (e.g. <code>$paypal["item_number"]</code>, <code>$paypal["item_name"]</code>, etc). Please note that all Replacement Codes will be parsed first, and then any PHP tags that you\'ve included. Also, please remember that emails are sent in plain text format.</p>'."\n"
+							'<p style="margin:0;"><strong>PHP Code:</strong> It is also possible to use PHP tags — optional (for developers). If you use PHP tags, please run a test email with <code>&lt;?php print_r(get_defined_vars()); ?&gt;</code>. This will give you a full list of all PHP variables available to you in this email. The <code>$authnet</code> variable is the most important one. It contains all of the <code>$_POST</code> variables received from your Pro Form integration (related to the transaction itself); which are then translated into a format that s2Member\'s Core Gateway Processor can understand (e.g. <code>$authnet["item_number"]</code>, <code>$authnet["item_name"]</code>, etc). Please note that all Replacement Codes will be parsed first, and then any PHP tags that you\'ve included. Also, please remember that emails are sent in plain text format.</p>'."\n"
 							: '';
 						echo '</td>' . "\n";
 
@@ -405,7 +405,7 @@ if (!class_exists ("c_ws_plugin__s2member_pro_menu_page_authnet_ops"))
 
 						echo (!is_multisite () || !c_ws_plugin__s2member_utils_conds::is_multisite_farm () || is_main_site ()) ?
 							'<div class="ws-menu-page-hr"></div>' . "\n".
-							'<p style="margin:0;"><strong>PHP Code:</strong> It is also possible to use PHP tags — optional (for developers). If you use PHP tags, please run a test email with <code>&lt;?php print_r(get_defined_vars()); ?&gt;</code>. This will give you a full list of all PHP variables available to you in this email. The <code>$paypal</code> variable is the most important one. It contains all of the <code>$_POST</code> variables received from your Pro Form integration (related to the transaction itself); which are then translated into a format that s2Member\'s Core PayPal Processor can understand (e.g. <code>$paypal["item_number"]</code>, <code>$paypal["item_name"]</code>, etc). Please note that all Replacement Codes will be parsed first, and then any PHP tags that you\'ve included. Also, please remember that emails are sent in plain text format.</p>'."\n"
+							'<p style="margin:0;"><strong>PHP Code:</strong> It is also possible to use PHP tags — optional (for developers). If you use PHP tags, please run a test email with <code>&lt;?php print_r(get_defined_vars()); ?&gt;</code>. This will give you a full list of all PHP variables available to you in this email. The <code>$authnet</code> variable is the most important one. It contains all of the <code>$_POST</code> variables received from your Pro Form integration (related to the transaction itself); which are then translated into a format that s2Member\'s Core Gateway Processor can understand (e.g. <code>$authnet["item_number"]</code>, <code>$authnet["item_name"]</code>, etc). Please note that all Replacement Codes will be parsed first, and then any PHP tags that you\'ve included. Also, please remember that emails are sent in plain text format.</p>'."\n"
 							: '';
 						echo '</td>'."\n";
 
@@ -513,7 +513,7 @@ if (!class_exists ("c_ws_plugin__s2member_pro_menu_page_authnet_ops"))
 
 						echo (!is_multisite () || !c_ws_plugin__s2member_utils_conds::is_multisite_farm () || is_main_site ()) ?
 							'<div class="ws-menu-page-hr"></div>' . "\n".
-							'<p style="margin:0;"><strong>PHP Code:</strong> It is also possible to use PHP tags — optional (for developers). If you use PHP tags, please run a test email with <code>&lt;?php print_r(get_defined_vars()); ?&gt;</code>. This will give you a full list of all PHP variables available to you in this email. The <code>$paypal</code> variable is the most important one. It contains all of the <code>$_POST</code> variables received from your Pro Form integration (related to the transaction itself); which are then translated into a format that s2Member\'s Core PayPal Processor can understand (e.g. <code>$paypal["item_number"]</code>, <code>$paypal["item_name"]</code>, etc). Please note that all Replacement Codes will be parsed first, and then any PHP tags that you\'ve included. Also, please remember that emails are sent in plain text format.</p>'."\n"
+							'<p style="margin:0;"><strong>PHP Code:</strong> It is also possible to use PHP tags — optional (for developers). If you use PHP tags, please run a test email with <code>&lt;?php print_r(get_defined_vars()); ?&gt;</code>. This will give you a full list of all PHP variables available to you in this email. The <code>$authnet</code> variable is the most important one. It contains all of the <code>$_POST</code> variables received from your Pro Form integration (related to the transaction itself); which are then translated into a format that s2Member\'s Core Gateway Processor can understand (e.g. <code>$authnet["item_number"]</code>, <code>$authnet["item_name"]</code>, etc). Please note that all Replacement Codes will be parsed first, and then any PHP tags that you\'ve included. Also, please remember that emails are sent in plain text format.</p>'."\n"
 							: '';
 						echo '</td>'."\n";
 
@@ -609,7 +609,7 @@ if (!class_exists ("c_ws_plugin__s2member_pro_menu_page_authnet_ops"))
 
 						echo (!is_multisite () || !c_ws_plugin__s2member_utils_conds::is_multisite_farm () || is_main_site ()) ?
 							'<div class="ws-menu-page-hr"></div>' . "\n".
-							'<p style="margin:0;"><strong>PHP Code:</strong> It is also possible to use PHP tags — optional (for developers). If you use PHP tags, please run a test email with <code>&lt;?php print_r(get_defined_vars()); ?&gt;</code>. This will give you a full list of all PHP variables available to you in this email. The <code>$paypal</code> variable is the most important one. It contains all of the <code>$_POST</code> variables received from your Pro Form integration (related to the transaction itself); which are then translated into a format that s2Member\'s Core PayPal Processor can understand (e.g. <code>$paypal["item_number"]</code>, <code>$paypal["item_name"]</code>, etc). Please note that all Replacement Codes will be parsed first, and then any PHP tags that you\'ve included. Also, please remember that emails are sent in plain text format.</p>'."\n"
+							'<p style="margin:0;"><strong>PHP Code:</strong> It is also possible to use PHP tags — optional (for developers). If you use PHP tags, please run a test email with <code>&lt;?php print_r(get_defined_vars()); ?&gt;</code>. This will give you a full list of all PHP variables available to you in this email. The <code>$authnet</code> variable is the most important one. It contains all of the <code>$_POST</code> variables received from your Pro Form integration (related to the transaction itself); which are then translated into a format that s2Member\'s Core Gateway Processor can understand (e.g. <code>$authnet["item_number"]</code>, <code>$authnet["item_name"]</code>, etc). Please note that all Replacement Codes will be parsed first, and then any PHP tags that you\'ve included. Also, please remember that emails are sent in plain text format.</p>'."\n"
 							: '';
 						echo '</td>' . "\n";
 
@@ -771,7 +771,7 @@ if (!class_exists ("c_ws_plugin__s2member_pro_menu_page_authnet_ops"))
 
 						echo '<th>' . "\n";
 						echo '<label for="ws-plugin--s2member-triggers-immediate-eot">' . "\n";
-						echo 'Refunds/Reversals (trigger Immediate EOT)?' . "\n";
+						echo 'Refunds/Partial Refunds/Reversals (trigger Immediate EOT)?'."\n";
 						echo '</label>' . "\n";
 						echo '</th>' . "\n";
 
@@ -780,7 +780,7 @@ if (!class_exists ("c_ws_plugin__s2member_pro_menu_page_authnet_ops"))
 
 						echo '<td>' . "\n";
 						echo '<select name="ws_plugin__s2member_triggers_immediate_eot" id="ws-plugin--s2member-triggers-immediate-eot" disabled="disabled">' . "\n";
-						echo '<option value="none" selected="selected">Neither (I\'ll review these two events manually)</option>' . "\n";
+						echo '<option value="none" selected="selected">Neither (I\'ll review these three events manually)</option>' . "\n";
 						echo '</select><br />' . "\n";
 						echo '<em>N/A with Authorize.Net. Authorize.Net does NOT notify s2Member on refunds/chargebacks.</em>' . "\n";
 						echo '</td>' . "\n";

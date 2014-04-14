@@ -13,6 +13,8 @@
 *
 * @package s2Member\Menu_Pages
 * @since 3.0
+ *
+ * @TODO Shortcode equivalents using [else] syntax.
 */
 if (realpath (__FILE__) === realpath ($_SERVER["SCRIPT_FILENAME"]))
 	exit ("Do not access this file directly.");
@@ -82,27 +84,40 @@ if (!class_exists ("c_ws_plugin__s2member_menu_page_scripting"))
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-										echo '<p><strong>Example #2:</strong> Full access for any Member with a Level >= 1.</strong></p>' . "\n";
+										echo '<p><strong>Example #2:</strong> The same as example #1, but this uses <code>[else]</code> syntax.</strong></p>' . "\n";
+										if(!c_ws_plugin__s2member_utils_conds::pro_is_installed()) echo '<p><em><strong class="ws-menu-page-hilite">NOTE: the use of <code>[else]</code> requires s2Member Pro.</strong></em></p>' . "\n";
+										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-is-user-logged-in-else-farm.x-php")) . '</p>' . "\n";
+
+										echo '<div class="ws-menu-page-hr"></div>' . "\n";
+
+										echo '<p><strong>Example #3:</strong> Full access for any Member with a Level >= 1; also using <code>[else]</code> syntax.</strong></p>' . "\n";
+										if(!c_ws_plugin__s2member_utils_conds::pro_is_installed()) echo '<p><em><strong class="ws-menu-page-hilite">NOTE: the use of <code>[else]</code> requires s2Member Pro.</strong></em></p>' . "\n";
 										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-current-user-can-full-access-farm.x-php")) . '</p>' . "\n";
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-										echo '<p><strong>Example #3:</strong> Specific content for each different Member Level.</strong></p>' . "\n";
+										echo '<p><strong>Example #4:</strong> Specific content for each different Member Level.</strong></p>' . "\n";
 										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-current-user-is-specific-content-farm.x-php")) . '</p>' . "\n";
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-										echo '<p><strong>Example #4:</strong> Simple Conditionals w/ integrated use of [s2Get /].</strong></p>' . "\n";
+										echo '<p><strong>Example #5:</strong> The same as example #4, but this uses <code>[else]</code> syntax &amp; nesting.</strong></p>' . "\n";
+										if(!c_ws_plugin__s2member_utils_conds::pro_is_installed()) echo '<p><em><strong class="ws-menu-page-hilite">NOTE: the use of <code>[else]</code> requires s2Member Pro.</strong></em></p>' . "\n";
+										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-current-user-is-specific-content-else-farm.x-php")) . '</p>' . "\n";
+
+										echo '<div class="ws-menu-page-hr"></div>' . "\n";
+
+										echo '<p><strong>Example #6:</strong> Simple Conditionals w/ integrated use of [s2Get /].</strong></p>' . "\n";
 										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-s2-conditional-supplements-1-farm.x-php")) . '</p>' . "\n";
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-										echo '<p><strong>Example #5:</strong> Using multiple Conditionals together, and even nesting other Shortcodes.</strong></p>' . "\n";
+										echo '<p><strong>Example #7:</strong> Using multiple Conditionals together; also nesting other Shortcodes.</strong></p>' . "\n";
 										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-s2-conditional-supplements-2-farm.x-php")) . '</p>' . "\n";
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-										echo '<p><strong>Example #6:</strong> Using multiple Conditionals together, and even nesting Conditionals.</strong></p>' . "\n";
+										echo '<p><strong>Example #8:</strong> Using multiple Conditionals together; also nesting Conditionals.</strong></p>' . "\n";
 										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-s2-conditional-supplements-3-farm.x-php")) . '</p>' . "\n";
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
@@ -121,8 +136,11 @@ if (!class_exists ("c_ws_plugin__s2member_menu_page_scripting"))
 
 										echo '<p><em><strong>Implementing AND/OR Conditional expressions:</strong></em></p>' . "\n";
 										echo '<p><em>*Tip: do NOT mix AND/OR expressions.<br /> <strong class="ws-menu-page-error-hilite">BAD</strong> <code>is_user_logged_in() AND is_page(1) OR is_page(2)</code><br />- use one or the other; do NOT mix AND/OR together.</em></p>' . "\n";
-										echo '<p><em><strong class="ws-menu-page-hilite">If you need to have both types of logic, use nesting:</strong></em></p>' . "\n";
-										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-s2-conditional-nesting.x-php")) . '</p>' . "\n";
+										echo '<p><em><strong class="ws-menu-page-hilite">If you need to have both types of logic, use nesting...</strong></em></p>' . "\n";
+										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-s2-conditional-nesting-farm.x-php")) . '</p>' . "\n";
+										echo '<p><em><strong class="ws-menu-page-hilite">Another example, if you use <code>[else]</code> when nesting...</strong></em></p>' . "\n";
+										if(!c_ws_plugin__s2member_utils_conds::pro_is_installed()) echo '<p><em><strong class="ws-menu-page-hilite">NOTE: the use of <code>[else]</code> requires s2Member Pro.</strong></em></p>' . "\n";
+										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-s2-conditional-nesting-else-farm.x-php")) . '</p>' . "\n";
 										echo '</div>' . "\n";
 
 										echo '</div>' . "\n";
@@ -150,27 +168,40 @@ if (!class_exists ("c_ws_plugin__s2member_menu_page_scripting"))
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-										echo '<p><strong>Example #2:</strong> Full access for any Member with a Level >= 1.</strong></p>' . "\n";
+										echo '<p><strong>Example #2:</strong> The same as example #1, but this uses <code>[else]</code> syntax.</strong></p>' . "\n";
+										if(!c_ws_plugin__s2member_utils_conds::pro_is_installed()) echo '<p><em><strong class="ws-menu-page-hilite">NOTE: the use of <code>[else]</code> requires s2Member Pro.</strong></em></p>' . "\n";
+										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-is-user-logged-in-else.x-php")) . '</p>' . "\n";
+
+										echo '<div class="ws-menu-page-hr"></div>' . "\n";
+
+										echo '<p><strong>Example #3:</strong> Full access for any Member with a Level >= 1; also using <code>[else]</code> syntax.</strong></p>' . "\n";
+										if(!c_ws_plugin__s2member_utils_conds::pro_is_installed()) echo '<p><em><strong class="ws-menu-page-hilite">NOTE: the use of <code>[else]</code> requires s2Member Pro.</strong></em></p>' . "\n";
 										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-current-user-can-full-access.x-php")) . '</p>' . "\n";
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-										echo '<p><strong>Example #3:</strong> Specific content for each different Member Level.</strong></p>' . "\n";
+										echo '<p><strong>Example #4:</strong> Specific content for each different Member Level.</strong></p>' . "\n";
 										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-current-user-is-specific-content.x-php")) . '</p>' . "\n";
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-										echo '<p><strong>Example #4:</strong> Simple Conditionals w/ integrated use of [s2Get /].</strong></p>' . "\n";
+										echo '<p><strong>Example #5:</strong> The same as example #4, but this uses <code>[else]</code> syntax &amp; nesting.</strong></p>' . "\n";
+										if(!c_ws_plugin__s2member_utils_conds::pro_is_installed()) echo '<p><em><strong class="ws-menu-page-hilite">NOTE: the use of <code>[else]</code> requires s2Member Pro.</strong></em></p>' . "\n";
+										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-current-user-is-specific-content-else.x-php")) . '</p>' . "\n";
+
+										echo '<div class="ws-menu-page-hr"></div>' . "\n";
+
+										echo '<p><strong>Example #6:</strong> Simple Conditionals w/ integrated use of [s2Get /].</strong></p>' . "\n";
 										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-s2-conditional-supplements-1.x-php")) . '</p>' . "\n";
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-										echo '<p><strong>Example #5:</strong> Using multiple Conditionals together, and even nesting other Shortcodes.</strong></p>' . "\n";
+										echo '<p><strong>Example #7:</strong> Using multiple Conditionals together; also nesting other Shortcodes.</strong></p>' . "\n";
 										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-s2-conditional-supplements-2.x-php")) . '</p>' . "\n";
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-										echo '<p><strong>Example #6:</strong> Using multiple Conditionals together, and even nesting Conditionals.</strong></p>' . "\n";
+										echo '<p><strong>Example #8:</strong> Using multiple Conditionals together; also nesting Conditionals.</strong></p>' . "\n";
 										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-s2-conditional-supplements-3.x-php")) . '</p>' . "\n";
 
 										echo '<div class="ws-menu-page-hr"></div>' . "\n";
@@ -189,8 +220,11 @@ if (!class_exists ("c_ws_plugin__s2member_menu_page_scripting"))
 
 										echo '<p><em><strong>Implementing AND/OR Conditional expressions:</strong></em></p>' . "\n";
 										echo '<p><em>*Tip: do NOT mix AND/OR expressions.<br /> <strong class="ws-menu-page-error-hilite">BAD</strong> <code>is_user_logged_in() AND is_page(1) OR is_page(2)</code><br />- use one or the other; do NOT mix AND/OR together.</em></p>' . "\n";
-										echo '<p><em><strong class="ws-menu-page-hilite">If you need to have both types of logic, use nesting:</strong></em></p>' . "\n";
+										echo '<p><em><strong class="ws-menu-page-hilite">If you need to have both types of logic, use nesting...</strong></em></p>' . "\n";
 										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-s2-conditional-nesting.x-php")) . '</p>' . "\n";
+										echo '<p><em><strong class="ws-menu-page-hilite">Another example, if you use <code>[else]</code> when nesting...</strong></em></p>' . "\n";
+										if(!c_ws_plugin__s2member_utils_conds::pro_is_installed()) echo '<p><em><strong class="ws-menu-page-hilite">NOTE: the use of <code>[else]</code> requires s2Member Pro.</strong></em></p>' . "\n";
+										echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/sc-s2-conditional-nesting-else.x-php")) . '</p>' . "\n";
 										echo '</div>' . "\n";
 
 										echo '</div>' . "\n";
@@ -427,6 +461,12 @@ if (!class_exists ("c_ws_plugin__s2member_menu_page_scripting"))
 
 								echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
+								echo '<p><strong>A very simple way to drip content; via the <code>[s2Drip]</code> Shortcode:</strong></p>' . "\n";
+								if(!c_ws_plugin__s2member_utils_conds::pro_is_installed()) echo '<p><em><strong class="ws-menu-page-hilite">NOTE: the use of <code>[s2Drip]</code> requires s2Member Pro.</strong></em></p>' . "\n";
+								echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/s2drip-example1.x-php")) . '</p>' . "\n";
+
+								echo '<div class="ws-menu-page-hr"></div>' . "\n";
+
 								echo '<p><strong>To drip content using <code>S2MEMBER_CURRENT_USER_PAID_REGISTRATION_DAYS</code>:</strong></p>' . "\n";
 								echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/current-user-paid-registration-days-dripping.x-php")) . '</p>' . "\n";
 
@@ -435,7 +475,7 @@ if (!class_exists ("c_ws_plugin__s2member_menu_page_scripting"))
 								echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
 								echo '<h3>Very Advanced Content Dripping (some PHP required)</h3>' . "\n";
-								echo '<p>If you plan on dripping content in VERY advanced ways, you can tap into s2Member\'s recorded history of all Paid Registration Times. (i.e. <code>' . esc_html ('<?php $time = s2member_paid_registration_time("level1"); ?>') . '</code>) will give you a timestamp at which a Member first paid for Level#1 access. If they\'ve never paid for Level#1 access, the function will return 0. s2Member keeps a recorded history of timestamps associated with each Level that a Member gains access to, throughout the lifetime of their account. * NOTE: This requires s2Member v3.3+. Previous versions of s2Member did NOT record this information. If you implement this functionality on an upgraded installation of s2Member, please remember that s2Member will have NO Paid Registration Time for any Member you acquired prior to installing s2Member v3.3+. <em>Check the forums for work-arounds.</em></p>' . "\n";
+								echo '<p>If you plan on dripping content in VERY advanced ways, you can tap into s2Member\'s recorded history of all Paid Registration Times. (i.e. <code>' . esc_html ('<?php $time = s2member_paid_registration_time("level1"); ?>') . '</code>) will give you a timestamp at which a Member first paid for Level#1 access. If they\'ve never paid for Level#1 access, the function will return 0. s2Member keeps a recorded history of timestamps associated with each Level that a Member gains access to, throughout the lifetime of their account.</p>' . "\n";
 								echo '<p><strong>Here is the function documentation for PHP/WordPress developers:</strong></p>' . "\n";
 								echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/s2member-paid-registration-time.x-php")) . '</p>' . "\n";
 								echo '<p><strong>Here are some actual examples that should give you some ideas:</strong></p>' . "\n";
@@ -1035,27 +1075,33 @@ if (!class_exists ("c_ws_plugin__s2member_menu_page_scripting"))
 								echo '<div class="ws-menu-page-section ws-plugin--s2member-api-mop-vars-section">' . "\n";
 								echo '<h3>Membership Options Page Variables (some scripting required)</h3>' . "\n";
 								echo '<p>At the core of s2Member, is it\'s ability to protect content <em>(i.e. Posts, Pages, Tags, Categories, URI word fragments, etc)</em>. Whenever a public User, or even an existing Member attempts to access an area of your site that is unavailable to them; either because they are not logged-in, not a paying Member at all; or maybe they are logged-in, but they don\'t have access to content you\'ve protected at a higher Membership Level; s2Member will always redirect these unauthenticated requests to your Membership Options Page.</p>' . "\n";
-								echo '<p>So your Membership Options Page is a key element of your site. It serves as the focal point of your s2Member installation. Understanding this, you can see it becomes important for s2Member to provide information about what the User/Member was attempting to access <em>(e.g. before they were redirected to the Membership Options Page)</em>. This is where s2Member\'s MOP Vars come in <em>(i.e. Membership Options Page Variables)</em>. Whenever s2Member redirects a User/Member to your Membership Options Page, it will include these important MOP Variables in the query string of the URL. These Variables can be used to provide more informative messages; or even to provide a different set of Membership Options <em>(i.e. Payment Buttons)</em>, based on what a User/Member was attempting to access.</p>' . "\n";
+								echo '<p>So your Membership Options Page is a key element of your site. It serves as the focal point of your s2Member installation. Understanding this, you can see it becomes important for s2Member to provide information about what the User/Member was attempting to access <em>(before they were redirected to the Membership Options Page)</em>. This is where s2Member\'s MOP Vars come in <em>(i.e. Membership Options Page Variables)</em>. Whenever s2Member redirects a User/Member to your Membership Options Page, it will include these important MOP Variables in the query string of the URL. These Variables can be used to provide more informative messages; or even to provide a different set of Membership Options <em>(e.g. Payment Buttons)</em>, based on what a User/Member was attempting to access.</p>' . "\n";
 								do_action ("ws_plugin__s2member_during_scripting_page_during_left_sections_during_api_mop_vars", get_defined_vars ());
 
 								echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-								echo '<p><strong>TIP:</strong> In addition to this documentation, you may also want to have a look at the <a href="http://www.s2member.com/codex/" target="_blank" rel="external">s2Member Codex</a>.<br />' . "\n";
-								echo '<strong>See Also:</strong> <a href="http://www.s2member.com/codex/stable/s2member/api_constants/package-summary/" target="_blank" rel="external">s2Member Codex -› API Constants</a>, and <a href="http://www.s2member.com/codex/stable/s2member/api_functions/package-summary/" target="_blank" rel="external">s2Member Codex -› API Functions</a>.</p>' . "\n";
+								echo '<p><strong>TIP:</strong> If you\'re running s2Member Pro, there is a NEW simplified way to deal with MOP Vars using the <a href="http://www.s2member.com/kb/s2mop-shortcode/" target="_blank" rel="external"><code>[s2MOP]</code> Shortcode</a>.<br />' . "\n";
 
 								echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-								echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/api-mop-vars.x-php")) . '</p>' . "\n";
-
-								echo '<div class="ws-menu-page-hr"></div>' . "\n";
-
-								echo '<p><strong>Code Samples:</strong> This may give you some ideas [ <a href="#" onclick="jQuery(\'p#ws-plugin--s2member-api-mop-vars-code-samples\').toggle(); return false;" class="ws-dotted-link">click here</a> ].</p>' . "\n";
+								echo '<p><strong>PHP Code Sample:</strong> This may give you some other ideas [<a href="#" onclick="jQuery(\'p#ws-plugin--s2member-api-mop-vars-code-samples\').toggle(); return false;" class="ws-dotted-link">click here</a>].</p>' . "\n";
 								echo '<p id="ws-plugin--s2member-api-mop-vars-code-samples" style="display:none;">' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/api-mop-vars-e.x-php")) . '</p>' . "\n";
 
 								echo '<div class="ws-menu-page-hr"></div>' . "\n";
 
-								echo '<p><strong>Backward compatibility:</strong> The structure of s2Member\'s MOP Vars changed a bit in Nov, 2011. However, s2Member still provides the same MOP Vars that it used in previous versions, for backward compatibility. These <a href="#" onclick="jQuery(\'p#ws-plugin--s2member-old-api-mop-vars-details\').toggle(); return false;" class="ws-dotted-link">old MOP Variables</a> were more difficult to use; they are now deprecated <em>(i.e. they WILL eventually be removed)</em>. Going foward, please go by the new documentation above.</p>' . "\n";
+								echo '<p><strong>s2Member MOP Vars (Explained) ...</strong></p>' . "\n";
+								echo '<p>' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/api-mop-vars.x-php")) . '</p>' . "\n";
+
+								echo '<div class="ws-menu-page-hr"></div>' . "\n";
+
+								echo '<p><strong>Backward compatibility (the old way):</strong> The structure of s2Member\'s MOP Vars changed again in Apr, 2014. However, s2Member still provides the same MOP Vars that it used in previous versions, for backward compatibility. These <a href="#" onclick="jQuery(\'p#ws-plugin--s2member-old-api-mop-vars-details\').toggle(); return false;" class="ws-dotted-link">old MOP Variables</a> were more difficult to use; they are now deprecated <em>(i.e. they WILL eventually be removed)</em>. Going foward, please go by the new documentation above.</p>' . "\n";
 								echo '<p id="ws-plugin--s2member-old-api-mop-vars-details" style="display:none;">' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/api-mop-vars-o.x-php")) . '</p>' . "\n";
+								echo '</div>' . "\n";
+
+								echo '<div class="ws-menu-page-hr"></div>' . "\n";
+
+								echo '<p><strong>Backward compatibility (the really old way):</strong> The structure of s2Member\'s MOP Vars changed a bit in Nov, 2011. However, s2Member still provides the same MOP Vars that it used in previous versions, for backward compatibility. These <a href="#" onclick="jQuery(\'p#ws-plugin--s2member-really-old-api-mop-vars-details\').toggle(); return false;" class="ws-dotted-link">old MOP Variables</a> were more difficult to use; they are now deprecated <em>(i.e. they WILL eventually be removed)</em>. Going foward, please go by the new documentation above.</p>' . "\n";
+								echo '<p id="ws-plugin--s2member-really-old-api-mop-vars-details" style="display:none;">' . c_ws_plugin__s2member_utils_strings::highlight_php (file_get_contents (dirname (__FILE__) . "/code-samples/api-mop-vars-ro.x-php")) . '</p>' . "\n";
 								echo '</div>' . "\n";
 
 								echo '</div>' . "\n";

@@ -204,6 +204,10 @@ div.error {
 	line-height: 1;
 }
 
+#wp-tcepostcontent-editor-container {
+	border:1px solid #dedede;
+}
+
 /* = "My Events" Page Template Styles
    @ Template: event-list.php
 =============================================*/

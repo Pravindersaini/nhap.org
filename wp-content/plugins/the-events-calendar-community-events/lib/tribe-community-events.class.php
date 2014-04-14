@@ -19,12 +19,12 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 		/**
 		 * The current version of Community Events
 		 */
-		const VERSION = '3.4';
+		const VERSION = '3.5';
 
 		/**
 		 * required The Events Calendar Version
 		 */
-		const REQUIRED_TEC_VERSION = '3.4';
+		const REQUIRED_TEC_VERSION = '3.5';
 
 		/**
 		 * Singleton instance variable
@@ -569,7 +569,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 		 * @author Nick Ciske
 		 * @since 1.0
 		 */
-		public function redirectCallback( $tribe_id ) {
+		public static function redirectCallback( $tribe_id ) {
 
 			$tce = self::instance();
 
@@ -593,7 +593,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 		 * @since 1.0
 		 * @author Nick Ciske
 		 */
-		public function editCallback( $tribe_id ) {
+		public static function editCallback( $tribe_id ) {
 
 			$tce = self::instance();
 
@@ -603,6 +603,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 			$tce->removeFilters();
 
 			$context = $tce->getContext( 'edit', $tribe_id );
+			$tce->default_template_compatibility();
 
 			if ( !isset( $context['post_type'] ) )
 				return __( 'Not found.', 'tribe-events-community' );
@@ -642,7 +643,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 		 * @author Nick Ciske
 		 * @since 1.0
 		 */
-		public function addCallback() {
+		public static function addCallback() {
 
 			$tce = self::instance();
 
@@ -650,6 +651,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 			add_filter( 'edit_post_link', array( $tce, 'removeEditPostLink' ) );
 
 			$tce->removeFilters();
+			$tce->default_template_compatibility();
 			echo $tce->doEventForm();
 
 		}
@@ -662,7 +664,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 		 * @author Nick Ciske
 		 * @since 1.0
 		 */
-		public function listCallback( $page = 1 ) {
+		public static function listCallback( $page = 1 ) {
 
 			$tce = self::instance();
 
@@ -1403,7 +1405,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 					} else {
 						$date = $eventDate;
 
-						$startDate = TribeEvents::getRealStartDate( $tribe_event_id );
+						$startDate = TribeEvents::get_series_start_date( $tribe_event_id );
 						$date = TribeDateUtils::addTimeToDate( $date, TribeDateUtils::timeOnly( $startDate ) );
 						delete_post_meta( $tribe_event_id, '_EventStartDate', $date );
 
@@ -1441,13 +1443,12 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 		 */
 		public function doEventForm( $id = null ) {
 
-			if ( TribeEvents::ecpActive() ) {
+			if ( class_exists('TribeEventsPro') ) {
 				// venue and organizer defaults- override ECP defaults
-				add_filter( 'tribe_display_event_venue_dropdown_id', array( $this, 'tribe_display_event_venue_dropdown_id' ) );
-				add_filter( 'tribe_display_event_organizer_dropdown_id', array( $this, 'tribe_display_event_organizer_dropdown_id' ) );
+				add_filter( 'tribe_get_single_option', array( $this, 'filter_default_venue_id' ), 10, 3 );
+				add_filter( 'tribe_get_single_option', array( $this, 'filter_default_organizer_id' ), 10, 3 );
 			}
 
-			$this->default_template_compatibility();
 			add_filter( 'tribe-post-origin', array( $this, 'filterPostOrigin' ) );
 
 			$output    = '';
@@ -1462,7 +1463,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 				$tribe_event_id = null;
 			}
 
-			if ( class_exists( 'TribeEventsPro' ) && tribe_is_recurring_event( $id ) ) {
+			if ( $tribe_event_id && class_exists( 'TribeEventsPro' ) && tribe_is_recurring_event( $tribe_event_id ) ) {
 				$this->enqueueOutputMessage( sprintf( __('%sWarning:%s You are editing a recurring event. All changes will be applied to the entire series.', 'tribe-events-community' ), '<b>', '</b>' ), 'error' );
 			}
 
@@ -1577,6 +1578,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 				$show_form = apply_filters( 'tribe_community_events_show_form', $show_form );
 
 				if ( $show_form ) {
+					remove_filter( 'the_content', 'do_shortcode', 11 );
 
 					//get data from $_POST and override core function
 					add_filter( 'tribe_get_hour_options', array( $this, 'getHours' ), 10, 3 );
@@ -1592,7 +1594,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 						remove_action( 'tribe_events_cost_table', array( Event_Tickets_PRO::instance(), 'eventBriteMetaBox' ), 1 );
 					}
 
-					if ( TribeEvents::ecpActive() ) {
+					if ( class_exists('TribeEventsPro') ) {
 						remove_action( 'tribe_events_date_display', array( 'TribeEventsRecurrenceMeta', 'loadRecurrenceData' ) );
 						add_action( 'tribe_events_date_display', array( $this, 'loadRecurrenceData' ) );
 					}
@@ -1604,9 +1606,6 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 					ob_start();
 					if ( empty($_POST) || $this->messageType == 'error' ) {
 						do_action( 'tribe_events_community_form', $tribe_event_id, $event, $edit_template );
-						// pops up dialog for recurrring events when editing/deleting
-						// TODO: do we need to be including this? -- jbrinley
-						include TribeEventsTemplates::getTemplateHierarchy( 'community/modules/recurrence-dialog' );
 					} else {
 						include TribeEventsTemplates::getTemplateHierarchy( 'community/modules/header-links' );
 					}
@@ -1726,7 +1725,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 			}
 
 
-			if ( !TribeEvents::ecpActive() )
+			if ( !class_exists('TribeEventsPro') )
 				return __( 'This feature is not currently enabled.', 'tribe-events-community' );
 
 			if ( !is_user_logged_in() ) {
@@ -1748,7 +1747,8 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 					$_POST['ID'] = $tribe_venue_id;
 					$scrubber = new TribeCommunityEvents_VenueSubmissionScrubber($_POST);
 					$_POST = $scrubber->scrub();
-					$_POST[ 'Venue' ] = $_POST[ 'post_title' ];
+
+					remove_action( 'save_post_'.TribeEvents::VENUE_POST_TYPE, array( TribeEvents::instance(), 'save_venue_data' ), 16, 2 );
 
 					wp_update_post( array(
 						'post_title' => $_POST[ 'post_title' ],
@@ -1756,7 +1756,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 						'post_content' => $_POST[ 'post_content' ],
 					) );
 
-					TribeEventsAPI::updateVenue( $tribe_venue_id, $_POST );
+					TribeEventsAPI::updateVenue( $tribe_venue_id, $_POST['venue'] );
 
 					$this->enqueueOutputMessage( __( 'Venue updated.', 'tribe-events-community' ) );
 						/*
@@ -1781,10 +1781,6 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 
 			ob_start();
 			include TribeEventsTemplates::getTemplateHierarchy( 'community/edit-venue' );
-
-			// pops up dialog for recurrring events when editing/deleting
-			// TODO: do we need to be including this? -- jbrinley
-			include TribeEventsTemplates::getTemplateHierarchy( 'community/modules/recurrence-dialog' );
 
 			$output .= ob_get_clean();
 
@@ -1816,7 +1812,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 				return '<p>' . __( 'Organizer not found.', 'tribe-events-community' ) . '</p>';
 			}
 
-			if ( !TribeEvents::ecpActive() )
+			if ( !class_exists('TribeEventsPro') )
 				return __( 'This feature is not currently enabled.', 'tribe-events-community' );
 
 			if ( !is_user_logged_in() ) {
@@ -1839,7 +1835,8 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 					$_POST['ID'] = $tribe_organizer_id;
 					$scrubber = new TribeCommunityEvents_OrganizerSubmissionScrubber($_POST);
 					$_POST = $scrubber->scrub();
-					$_POST[ 'Organizer' ] = $_POST[ 'post_title' ];
+
+					remove_action( 'save_post_'.TribeEvents::ORGANIZER_POST_TYPE, array( TribeEvents::instance(), 'save_organizer_data' ), 16, 2 );
 
 					wp_update_post( array(
 						'post_title' => $_POST[ 'post_title' ],
@@ -1847,7 +1844,7 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 						'post_content' => $_POST[ 'post_content' ],
 					) );
 
-					TribeEventsAPI::updateOrganizer( $tribe_organizer_id, $_POST );
+					TribeEventsAPI::updateOrganizer( $tribe_organizer_id, $_POST['organizer'] );
 					$this->enqueueOutputMessage( __( 'Organizer updated.', 'tribe-events-community' ) );
 
 						/*
@@ -1928,9 +1925,6 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 				do_action( 'tribe_ce_before_event_list_page_template' );
 				ob_start();
 				include TribeEventsTemplates::getTemplateHierarchy( 'community/event-list' );
-
-				// TODO: do we need to be including this? -- jbrinley
-				include TribeEventsTemplates::getTemplateHierarchy( 'community/modules/recurrence-dialog' );
 				$output .= ob_get_clean();
 
 				wp_reset_query();
@@ -2561,36 +2555,42 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 		}
 
 		/**
-		 * Filter the venue dropdown id.
+		 * Filter the default venue ID to use the community default.
 		 *
-		 * @param int $venue_id The venue id.
-		 * @return int The filtered venue id.
-		 * @author Nick Ciske
-		 * @since 1.0
+		 * This should only be hooked in when on the community submission page.
+		 *
+		 * @param mixed $venue_id
+		 * @param mixed $default_value
+		 * @param string $option_name
+		 * @return mixed
 		 */
-		public function tribe_display_event_venue_dropdown_id( $venue_id ) {
-			$tce_venue = $this->getOption( 'defaultCommunityVenueID' );
-
-			if ( !$venue_id )
-			$venue_id = $tce_venue;
-
+		public function filter_default_venue_id( $venue_id, $default_value, $option_name ) {
+			if ( $option_name == 'eventsDefaultVenueID' ) {
+				$community_venue = $this->getOption( 'defaultCommunityVenueID' );
+				if ( !empty($community_venue) ) {
+					return $community_venue;
+				}
+			}
 			return $venue_id;
 		}
 
 		/**
-		 * Filter the organizer dropdown id.
+		 * Filter the default organizer ID to use the community default.
 		 *
-		 * @param int $organizer_id The organizer id.
-		 * @return int The filtered organizer id.
-		 * @author Nick Ciske
-		 * @since 1.0
+		 * This should only be hooked in when on the community submission page.
+		 *
+		 * @param mixed $organizer_id
+		 * @param mixed $default_value
+		 * @param string $option_name
+		 * @return mixed
 		 */
-		public function tribe_display_event_organizer_dropdown_id( $organizer_id ) {
-			$tce_organizer = $this->getOption( 'defaultCommunityOrganizerID' );
-
-			if ( !$organizer_id )
-				$organizer_id = $tce_organizer;
-
+		public function filter_default_organizer_id( $organizer_id, $default_value, $option_name ) {
+			if ( $option_name == 'eventsDefaultOrganizerID' ) {
+				$community_venue = $this->getOption( 'defaultCommunityOrganizerID' );
+				if ( !empty($community_venue) ) {
+					return $community_venue;
+				}
+			}
 			return $organizer_id;
 		}
 
@@ -2728,7 +2728,10 @@ if ( !class_exists( 'TribeCommunityEvents' ) ) {
 		 * @since 3.1
 		 */
 		protected function user_can_access_admin( $user_id = 0 ) {
-			if ( !is_array( $this->blockRolesList ) ) {
+			if ( !is_array( $this->blockRolesList ) || empty( $this->blockRolesList ) ) {
+				return TRUE;
+			}
+			if ( is_super_admin($user_id) ) {
 				return TRUE;
 			}
 			$user_roles = $this->getUserRoles($user_id);

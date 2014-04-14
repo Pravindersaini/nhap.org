@@ -372,11 +372,11 @@ class TribeEventsGeoLoc {
 		$data_arr = json_decode( $data["body"] );
 
 		if ( ! empty( $data_arr->results[0]->geometry->location->lat ) ) {
-			update_post_meta( $venueId, self::LAT, $data_arr->results[0]->geometry->location->lat );
+			update_post_meta( $venueId, self::LAT, (string) $data_arr->results[0]->geometry->location->lat );
 		}
 
 		if ( ! empty( $data_arr->results[0]->geometry->location->lng ) ) {
-			update_post_meta( $venueId, self::LNG, $data_arr->results[0]->geometry->location->lng );
+			update_post_meta( $venueId, self::LNG, (string) $data_arr->results[0]->geometry->location->lng );
 		}
 
 		// Saving the aggregated address so we don't need to ping google on every save
@@ -560,6 +560,7 @@ class TribeEventsGeoLoc {
 		                   'view'        => $view_state,
 		);
 
+		// @TODO: clean this up / refactor the following conditional
 		if ( $have_events) {
 			global $wp_query, $post;
 			$data     = $query->posts;
@@ -583,7 +584,7 @@ class TribeEventsGeoLoc {
 			$response['html'] .= ob_get_clean();
 		}
 
-		apply_filters( 'tribe_events_ajax_response', $response );
+		$response = apply_filters( 'tribe_events_ajax_response', $response );
 
 		header( 'Content-type: application/json' );
 		echo json_encode( $response );
@@ -727,13 +728,21 @@ class TribeEventsGeoLoc {
 	 * @return mixed
 	 */
 	public function estimate_center_point() {
-		global $wpdb;
+		global $wpdb, $wp_query;
+
 
 		$data = get_transient( self::ESTIMATION_CACHE_KEY );
 
 		if ( empty( $data ) ) {
 
-			$sql = "SELECT Max(lat) max_lat,
+			$data = array();
+
+			if ( ! empty( $wp_query->posts ) ) {
+
+				$event_ids = wp_list_pluck( $wp_query->posts, 'ID' );
+				$event_ids = implode( ',', $event_ids );
+
+				$sql = "SELECT Max(lat) max_lat,
 					       Max(lng) max_lng,
 					       Min(lat) min_lat,
 					       Min(lng) min_lng
@@ -747,15 +756,16 @@ class TribeEventsGeoLoc {
 				        FROM   $wpdb->postmeta
 				        WHERE  ( meta_key = '" . self::LAT . "'
 				            OR meta_key = '" . self::LNG . "')
-				            AND post_id IN (SELECT meta_value FROM $wpdb->postmeta WHERE meta_key='_EventVenueID')
+				            AND post_id IN (SELECT meta_value FROM $wpdb->postmeta WHERE meta_key='_EventVenueID' AND post_id IN ($event_ids) )
 				            ) coors
 		";
 
-			$data = $wpdb->get_results( $sql, ARRAY_A );
+				$data = $wpdb->get_results( $sql, ARRAY_A );
 
-			if ( ! empty( $data ) )
-				$data = array_shift( $data );
-
+				if ( ! empty( $data ) ) {
+					$data = array_shift( $data );
+				}
+			}
 			set_transient( self::ESTIMATION_CACHE_KEY, $data, 5000 );
 		}
 
@@ -783,12 +793,19 @@ class TribeEventsGeoLoc {
 			$title    = $event->post_title;
 			$link     = get_permalink( $event->ID );
 
-			$markers[] = array( 'lat'     => $lat,
-			                    'lng'     => $lng,
-			                    'title'   => $title,
-			                    'address' => $address,
-			                    'link'    => $link );
+			// replace commas with decimals in case they were saved with the european number format
+			$lat 	  = str_replace( ',', '.', $lat );
+			$lng 	  = str_replace( ',', '.', $lng );
 
+			$markers[] = array(
+				'lat' => $lat,
+				'lng' => $lng,
+				'title' => $title,
+				'address' => $address,
+				'link' => $link,
+				'venue_id' => $venue_id,
+				'event_id' => $event->ID
+			);
 		}
 
 		return $markers;

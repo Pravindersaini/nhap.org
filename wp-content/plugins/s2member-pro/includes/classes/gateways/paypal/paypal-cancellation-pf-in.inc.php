@@ -61,11 +61,11 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_cancellation_pf_in"))
 								$global_response = &$GLOBALS["ws_plugin__s2member_pro_paypal_cancellation_response"]; // This is a shorter reference.
 
 								$post_vars = c_ws_plugin__s2member_utils_strings::trim_deep(stripslashes_deep($_POST["s2member_pro_paypal_cancellation"]));
-								$post_vars["attr"] = unserialize(c_ws_plugin__s2member_utils_encryption::decrypt($post_vars["attr"])); // And run a Filter.
+								$post_vars["attr"]   = (!empty($post_vars["attr"])) ? (array)unserialize(c_ws_plugin__s2member_utils_encryption::decrypt($post_vars["attr"])) : array();
 								$post_vars["attr"] = apply_filters("ws_plugin__s2member_pro_paypal_cancellation_post_attr", $post_vars["attr"], get_defined_vars());
 
-								$post_vars["recaptcha_challenge_field"] = (!$post_vars["recaptcha_challenge_field"]) ? trim(stripslashes($_POST["recaptcha_challenge_field"])) : $post_vars["recaptcha_challenge_field"];
-								$post_vars["recaptcha_response_field"] = (!$post_vars["recaptcha_response_field"]) ? trim(stripslashes($_POST["recaptcha_response_field"])) : $post_vars["recaptcha_response_field"];
+								$post_vars["recaptcha_challenge_field"] = (isset($_POST["recaptcha_challenge_field"])) ? trim(stripslashes($_POST["recaptcha_challenge_field"])) : "";
+								$post_vars["recaptcha_response_field"] = (isset($_POST["recaptcha_response_field"])) ? trim(stripslashes($_POST["recaptcha_response_field"])) : "";
 
 								if(!c_ws_plugin__s2member_pro_paypal_responses::paypal_form_attr_validation_errors($post_vars["attr"])) // Must NOT have any attr errors.
 									{
@@ -125,7 +125,7 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_cancellation_pf_in"))
 																	}
 																else if($paypal && $paypal["TENDER"] === "P")
 																	{
-																		$global_response = array("response" => sprintf(_x('Please <a href="%s" rel="nofollow">log in at PayPal</a> to cancel your Subscription.', "s2member-front", "s2member"), esc_attr("https://".(($GLOBALS["WS_PLUGIN__"]["s2member"]["o"]["paypal_sandbox"]) ? "www.sandbox.paypal.com" : "www.paypal.com")."/cgi-bin/webscr?cmd=_subscr-find&amp;alias=".urlencode($GLOBALS["WS_PLUGIN__"]["s2member"]["o"]["paypal_business"]))), "error" => true);
+																		$global_response = array("response" => sprintf(_x('Please <a href="%s" rel="nofollow">log in at PayPal</a> to cancel your Subscription.', "s2member-front", "s2member"), esc_attr("https://".(($GLOBALS["WS_PLUGIN__"]["s2member"]["o"]["paypal_sandbox"]) ? "www.sandbox.paypal.com" : "www.paypal.com")."/cgi-bin/webscr?cmd=_subscr-find&amp;alias=".urlencode($GLOBALS["WS_PLUGIN__"]["s2member"]["o"]["paypal_merchant_id"]))), "error" => true);
 																	}
 																else // Else, there is no Billing Profile.
 																	{

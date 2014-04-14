@@ -40,7 +40,7 @@ if(!class_exists("c_ws_plugin__s2member_paypal_return_in_subscr_modify_w_level")
 				*/
 				public static function /* Conditional phase for ``c_ws_plugin__s2member_paypal_notify_in::paypal_notify()``. */ cp($vars = array())
 					{
-						extract /* Extract all vars passed in from: ``c_ws_plugin__s2member_paypal_notify_in::paypal_notify()``. */($vars);
+						extract /* Extract all vars passed in from: ``c_ws_plugin__s2member_paypal_notify_in::paypal_notify()``. */($vars, EXTR_OVERWRITE | EXTR_REFS);
 
 						if((!empty($paypal["txn_type"]) && preg_match("/^subscr_modify$/i", $paypal["txn_type"]))
 						&& (!empty($paypal["item_number"]) && preg_match($GLOBALS["WS_PLUGIN__"]["s2member"]["c"]["membership_item_number_w_level_regex"], $paypal["item_number"]))
@@ -114,6 +114,11 @@ if(!class_exists("c_ws_plugin__s2member_paypal_return_in_subscr_modify_w_level")
 
 														update_user_option($user_id, "s2member_subscr_gateway", $paypal["subscr_gateway"]);
 														update_user_option($user_id, "s2member_subscr_id", $paypal["subscr_id"]);
+
+														if(!empty($paypal["subscr_baid"]))
+															update_user_option ($user_id, "s2member_subscr_baid", $paypal["subscr_baid"]);
+														else delete_user_option ($user_id, "s2member_subscr_baid");
+
 														update_user_option($user_id, "s2member_custom", $paypal["custom"]);
 
 														if(!get_user_option("s2member_registration_ip", $user_id))

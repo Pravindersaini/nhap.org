@@ -130,6 +130,7 @@ if(!function_exists("ws_plugin__s2member_configure_options_and_their_defaults"))
 				$default_options["gateway_debug_logs_extensive"] = "0";
 
 				$default_options["lazy_load_css_js"] = "0";
+				$default_options["sc_conds_allow_arbitrary_php"] = "0";
 
 				$default_options["sec_encryption_key"] = "";
 				$default_options["sec_encryption_key_history"] = array();
@@ -167,12 +168,14 @@ if(!function_exists("ws_plugin__s2member_configure_options_and_their_defaults"))
 				$default_options["mms_auto_patch"] = "1";
 				$default_options["mms_registration_file"] = "wp-login";
 				$default_options["mms_registration_grants"] = "none";
-				for($n = 0, $v = 0; $n <= $GLOBALS["WS_PLUGIN__"]["s2member"]["c"]["levels"]; $n++, $v = $v + 5)$default_options["mms_registration_blogs_level".$n] = (string)$v;
+				for($n = 0, $v = 0; $n <= $GLOBALS["WS_PLUGIN__"]["s2member"]["c"]["levels"]; $n++, $v = $v + 5)
+					$default_options["mms_registration_blogs_level".$n] = (string)$v;
 
 				$default_options["login_welcome_page"] = "";
 				$default_options["login_redirection_override"] = "";
 				$default_options["login_redirection_always_http"] = "1";
 				$default_options["membership_options_page"] = "";
+				$default_options["membership_options_page_vars_enable"] = "1";
 
 				$default_options["login_reg_design_enabled"] = "1";
 
@@ -246,10 +249,16 @@ if(!function_exists("ws_plugin__s2member_configure_options_and_their_defaults"))
 				$default_options["sp_email_message"] = sprintf(_x("Thanks %%%%first_name%%%%!\n\n%%%%item_name%%%%\n\nYour order can be retrieved here:\n%%%%sp_access_url%%%%\n(link expires in %%%%sp_access_exp%%%%)\n\nIf you have any trouble, please feel free to contact us.\n\nBest Regards,\n%s", "s2member-front", "s2member"), get_bloginfo("name"));
 
 				$default_options["mailchimp_api_key"] = "";
+				$default_options["getresponse_api_key"] = "";
 
-				for($n = 0; $n <= $GLOBALS["WS_PLUGIN__"]["s2member"]["c"]["levels"]; $n++)$default_options["level".$n."_mailchimp_list_ids"] = "";
+				for($n = 0; $n <= $GLOBALS["WS_PLUGIN__"]["s2member"]["c"]["levels"]; $n++)
+					$default_options["level".$n."_mailchimp_list_ids"] = "";
 
-				for($n = 0; $n <= $GLOBALS["WS_PLUGIN__"]["s2member"]["c"]["levels"]; $n++)$default_options["level".$n."_aweber_list_ids"] = "";
+				for($n = 0; $n <= $GLOBALS["WS_PLUGIN__"]["s2member"]["c"]["levels"]; $n++)
+					$default_options["level".$n."_getresponse_list_ids"] = "";
+
+				for($n = 0; $n <= $GLOBALS["WS_PLUGIN__"]["s2member"]["c"]["levels"]; $n++)
+					$default_options["level".$n."_aweber_list_ids"] = "";
 
 				$default_options["signup_notification_urls"] = "";
 				$default_options["registration_notification_urls"] = "";
@@ -282,6 +291,7 @@ if(!function_exists("ws_plugin__s2member_configure_options_and_their_defaults"))
 				$default_options["file_download_limit_exceeded_page"] = "";
 				$default_options["file_download_inline_extensions"] = "";
 				$default_options["file_download_stream_extensions"] = "";
+				$default_options["file_download_content_encodong_none"] = "0";
 
 				$default_options["amazon_s3_files_bucket"] = "";
 				$default_options["amazon_s3_files_access_key"] = "";
@@ -312,7 +322,7 @@ if(!function_exists("ws_plugin__s2member_configure_options_and_their_defaults"))
 
 				$default_options["specific_ids"] = "";
 
-				$default_options["triggers_immediate_eot"] = "refunds,reversals";
+				$default_options["triggers_immediate_eot"] = "refunds,partial_refunds,reversals";
 				$default_options["membership_eot_behavior"] = "demote";
 				$default_options["eot_time_ext_behavior"] = "extend";
 				$default_options["auto_eot_system_enabled"] = "1";
@@ -352,6 +362,9 @@ if(!function_exists("ws_plugin__s2member_configure_options_and_their_defaults"))
 									$value = $default_options[$key];
 
 								else if($key === "lazy_load_css_js" && (!is_string($value) || !is_numeric($value)))
+									$value = $default_options[$key];
+
+								else if($key === "sc_conds_allow_arbitrary_php" && (!is_string($value) || !is_numeric($value)))
 									$value = $default_options[$key];
 
 								else if($key === "sec_encryption_key" && (!is_string($value) || !strlen($value)))
@@ -436,6 +449,9 @@ if(!function_exists("ws_plugin__s2member_configure_options_and_their_defaults"))
 									$value = $default_options[$key];
 
 								else if($key === "membership_options_page" && (!is_string($value) || !is_numeric($value)))
+									$value = $default_options[$key];
+
+								else if($key === "membership_options_page_vars_enable" && (!is_string($value) || !is_numeric($value)))
 									$value = $default_options[$key];
 
 								else if($key === "login_reg_design_enabled" && (!is_string($value) || !is_numeric($value)))

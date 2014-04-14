@@ -61,11 +61,11 @@ if (!class_exists ("c_ws_plugin__s2member_pro_paypal_registration_in"))
 								$global_response = &$GLOBALS["ws_plugin__s2member_pro_paypal_registration_response"]; // This is a shorter reference.
 
 								$post_vars = c_ws_plugin__s2member_utils_strings::trim_deep (stripslashes_deep ($_POST["s2member_pro_paypal_registration"]));
-								$post_vars["attr"] = unserialize (c_ws_plugin__s2member_utils_encryption::decrypt ($post_vars["attr"])); // And run a Filter.
+								$post_vars["attr"]   = (!empty($post_vars["attr"])) ? (array)unserialize(c_ws_plugin__s2member_utils_encryption::decrypt($post_vars["attr"])) : array();
 								$post_vars["attr"] = apply_filters ("ws_plugin__s2member_pro_paypal_registration_post_attr", $post_vars["attr"], get_defined_vars ());
 
-								$post_vars["recaptcha_challenge_field"] = (!$post_vars["recaptcha_challenge_field"]) ? trim (stripslashes ($_POST["recaptcha_challenge_field"])) : $post_vars["recaptcha_challenge_field"];
-								$post_vars["recaptcha_response_field"] = (!$post_vars["recaptcha_response_field"]) ? trim (stripslashes ($_POST["recaptcha_response_field"])) : $post_vars["recaptcha_response_field"];
+								$post_vars["recaptcha_challenge_field"] = (isset($_POST["recaptcha_challenge_field"])) ? trim(stripslashes($_POST["recaptcha_challenge_field"])) : "";
+								$post_vars["recaptcha_response_field"] = (isset($_POST["recaptcha_response_field"])) ? trim(stripslashes($_POST["recaptcha_response_field"])) : "";
 
 								$post_vars["name"] = trim ($post_vars["first_name"] . " " . $post_vars["last_name"]);
 								$post_vars["email"] = apply_filters ("user_registration_email", sanitize_email ($post_vars["email"]), get_defined_vars ());
@@ -92,7 +92,6 @@ if (!class_exists ("c_ws_plugin__s2member_pro_paypal_registration_in"))
 																	if (isset ($post_vars["custom_fields"][$field_var]))
 																		$_POST["ws_plugin__s2member_custom_reg_field_" . $field_var] = $post_vars["custom_fields"][$field_var];
 																}
-
 														$GLOBALS["ws_plugin__s2member_registration_vars"]["ws_plugin__s2member_custom_reg_field_s2member_level"] = $post_vars["attr"]["level"];
 														$GLOBALS["ws_plugin__s2member_registration_vars"]["ws_plugin__s2member_custom_reg_field_s2member_ccaps"] = $post_vars["attr"]["ccaps"];
 														$GLOBALS["ws_plugin__s2member_registration_vars"]["ws_plugin__s2member_custom_reg_field_s2member_auto_eot_time"] = $post_vars["attr"]["tp"] . " " . $post_vars["attr"]["tt"];

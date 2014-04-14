@@ -31,7 +31,7 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 		<tr>
 			<td>
 				<label for="EventCurrencySymbol">
-					<?php _e('Currency Symbol','tribe-events-calendar'); ?>:
+					<?php _e('Currency Symbol:','tribe-events-calendar'); ?>
 				</label>
 			</td>
 			<td>
@@ -41,7 +41,7 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 		<tr>
 			<td>
 				<label for="EventCost">
-					<?php _e('Cost','tribe-events-calendar'); ?>:
+					<?php _e('Cost:','tribe-events-calendar'); ?>
 				</label>
 			</td>
 			<td><input type='text' id="EventCost" name="EventCost" size="6" value="<?php echo (isset($_POST['EventCost'])) ? esc_attr($_POST['EventCost']) : tribe_get_cost(); ?>" /></td>

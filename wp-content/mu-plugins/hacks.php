@@ -395,7 +395,7 @@
 	}
 	add_shortcode('buzz', 'buzz_btn');	
 	function events_btn() {
-		$markup = '<a class="call-to-action blue" href="http://nhap.org/events/" title="EVENTS"><div class="icon events">EVENTS</div></a>';
+		$markup = '<a class="call-to-action blue" href="http://nhap.org/events/" title="ALL EVENTS"><div class="icon events">ALL EVENTS</div></a>';
 		return $markup;
 	}
 	add_shortcode('events', 'events_btn');	

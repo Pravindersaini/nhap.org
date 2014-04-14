@@ -29,7 +29,6 @@ class TribeCommunityEvents_SubmissionScrubber {
 		'Venue',
 		'Organizer',
 		'is_recurring',
-		'recurrence_action',
 		'recurrence',
 	);
 
@@ -213,7 +212,7 @@ class TribeCommunityEvents_SubmissionScrubber {
 			if( apply_filters( 'tribe_events_community_submission_should_strip_html', true, $user_id, $this->submission['ID'] ) ) {
 				$this->filters[] = 'wp_kses_post';
 			}
-			if ( apply_filters( 'tribe_events_community_submission_should_strip_shortcodes', true, $user_id, $this->submission['ID'] ) ) {
+			if ( apply_filters( 'tribe_events_community_submission_should_strip_shortcodes', false, $user_id, $this->submission['ID'] ) ) {
 				$this->filters[] = 'strip_shortcodes';
 			}
 		}

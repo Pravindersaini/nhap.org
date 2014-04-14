@@ -68,7 +68,7 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 					<th class="essential"><?php _e( 'Organizer','tribe-events-community' ); ?></th>
 					<th class="essential"><?php _e( 'Venue','tribe-events-community' ); ?></th>
 					<th class="optional1"><?php _e( 'Category','tribe-events-community' ); ?></th>
-					<?php if(TribeEvents::ecpActive())
+					<?php if(class_exists('TribeEventsPro'))
 						echo '<th class="optional2">'. __( 'Recurring?','tribe-events-community' ) .'</th>'; ?>
 					<th class="essential"><?php _e( 'Start Date','tribe-events-community' ); ?></th>
 					<th class="essential"><?php _e( 'End Date','tribe-events-community' ); ?></th>
@@ -134,7 +134,7 @@ if ( !defined('ABSPATH') ) { die('-1'); }
 
 						<td><?php echo TribeEventsAdminList::custom_columns( 'events-cats', $post->ID, false ); ?></td>
 
-						<?php if ( TribeEvents::ecpActive() ) { ?>
+						<?php if ( function_exists('tribe_is_recurring_event') ) { ?>
 							<td>
 							<?php if ( tribe_is_recurring_event( $post->ID ) ) {
 								_e('Yes','tribe-events-community' );

@@ -35,5 +35,7 @@ if(realpath(__FILE__) === realpath($_SERVER["SCRIPT_FILENAME"]))
 /*
 Add WordPress Editor Shortcodes.
 */
-add_shortcode("s2Member-Pro-Drip", "c_ws_plugin__s2member_pro_sc_dripping::sc_drip");
+add_shortcode("s2Drip", "c_ws_plugin__s2member_pro_sc_drip::shortcode");
+add_shortcode("s2MOP", "c_ws_plugin__s2member_pro_sc_mop_vars_notice::shortcode");
+add_shortcode("s2MOPNotice", "c_ws_plugin__s2member_pro_sc_mop_vars_notice::shortcode");
 ?>

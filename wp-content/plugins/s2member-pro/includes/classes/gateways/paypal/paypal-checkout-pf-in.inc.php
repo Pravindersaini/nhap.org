@@ -63,16 +63,13 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 								$GLOBALS["ws_plugin__s2member_pro_paypal_checkout_response"] = array(); // This holds the global response details.
 								$global_response = &$GLOBALS["ws_plugin__s2member_pro_paypal_checkout_response"]; // This is a shorter reference.
 
-								$post_vars = ($xco_post_vars) ? $xco_post_vars : $_POST["s2member_pro_paypal_checkout"];
-								$post_vars = c_ws_plugin__s2member_utils_strings::trim_deep(stripslashes_deep($post_vars)); // And Filter.
-								$post_vars["attr"] = (!$xco_post_vars) ? unserialize(c_ws_plugin__s2member_utils_encryption::decrypt($post_vars["attr"])) : $post_vars["attr"];
-								$post_vars["attr"] = (!$xco_post_vars) ? apply_filters("ws_plugin__s2member_pro_paypal_checkout_post_attr", $post_vars["attr"], get_defined_vars()) : $post_vars["attr"];
+								if(!empty($xco_post_vars)) // A customer is returning from Express Checkout @ PayPal?
+									$_POST = $xco_post_vars; // POST vars from submission prior to Express Checkout.
 
-								if($xco_post_vars) // No need to re-validate this upon return from Express Checkout.
-									$post_vars["attr"]["captcha"] = "0";
-
-								$post_vars["recaptcha_challenge_field"] = (!$post_vars["recaptcha_challenge_field"]) ? trim(stripslashes($_POST["recaptcha_challenge_field"])) : $post_vars["recaptcha_challenge_field"];
-								$post_vars["recaptcha_response_field"] = (!$post_vars["recaptcha_response_field"]) ? trim(stripslashes($_POST["recaptcha_response_field"])) : $post_vars["recaptcha_response_field"];
+								$post_vars           = c_ws_plugin__s2member_utils_strings::trim_deep(stripslashes_deep($_POST["s2member_pro_paypal_checkout"]));
+								$post_vars["attr"]   = (!empty($post_vars["attr"])) ? (array)unserialize(c_ws_plugin__s2member_utils_encryption::decrypt($post_vars["attr"])) : array();
+								$post_vars["attr"]   = apply_filters("ws_plugin__s2member_pro_paypal_checkout_post_attr", $post_vars["attr"], get_defined_vars());
+								if(!empty($xco_post_vars)) $post_vars["attr"]["captcha"] = "0"; // No need to revalidate captcha in this case.
 
 								$post_vars["name"] = trim($post_vars["first_name"]." ".$post_vars["last_name"]);
 								$post_vars["email"] = apply_filters("user_registration_email", sanitize_email($post_vars["email"]), get_defined_vars());
@@ -81,6 +78,9 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 
 								if(empty($post_vars["card_expiration"]) && isset($post_vars["card_expiration_month"], $post_vars["card_expiration_year"]))
 									$post_vars["card_expiration"] = $post_vars["card_expiration_month"]."/".$post_vars["card_expiration_year"];
+
+								$post_vars["recaptcha_challenge_field"] = (isset($_POST["recaptcha_challenge_field"])) ? trim(stripslashes($_POST["recaptcha_challenge_field"])) : "";
+								$post_vars["recaptcha_response_field"] = (isset($_POST["recaptcha_response_field"])) ? trim(stripslashes($_POST["recaptcha_response_field"])) : "";
 
 								(!empty($_GET["token"])) ? delete_transient("s2m_".md5("s2member_transient_express_checkout_".$_GET["token"])) : null;
 
@@ -138,6 +138,15 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 
 														$user = (is_user_logged_in() && is_object($user = wp_get_current_user()) && ($user_id = $user->ID)) ? $user : false;
 
+														$period1 = c_ws_plugin__s2member_paypal_utilities::paypal_pro_period1($post_vars["attr"]["tp"]." ".$post_vars["attr"]["tt"]);
+														$period3 = c_ws_plugin__s2member_paypal_utilities::paypal_pro_period3($post_vars["attr"]["rp"]." ".$post_vars["attr"]["rt"]);
+
+														$start_time = ($post_vars["attr"]["tp"]) ? // If there's an Initial/Trial Period; start when it's over.
+														c_ws_plugin__s2member_pro_paypal_utilities::paypal_start_time($period1) : // After Trial is over.
+														c_ws_plugin__s2member_pro_paypal_utilities::paypal_start_time($period3); // Or next billing cycle.
+
+														$reference = $start_time.":".$period1.":".$period3."~".$_SERVER["HTTP_HOST"]."~".$post_vars["attr"]["level_ccaps_eotper"];
+
 														if(!($paypal_set_xco = array()) /* PayPal Express Checkout. */)
 															{
 																if($use_recurring_profile /* Use Payflow API instead? */)
@@ -157,12 +166,20 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 																		$paypal_set_xco["AMT"] = "0.00";
 																		$paypal_set_xco["CURRENCY"] = $cost_calculations["cur"];
 																		$paypal_set_xco["PAYMENTTYPE"] = "any";
-
-																		$paypal_set_xco["ORDERDESC"] = $cost_calculations["desc"];
+																		$paypal_set_xco["INVNUM"] = $reference;
 
 																		$paypal_set_xco["BILLINGTYPE"] = "RecurringBilling";
+																		// When this is present an amount of 0.00 is not allowed for whatever reason.
+																		// $paypal_set_xco["L_BILLINGTYPE0"] = "RecurringBilling";
+
+																		$paypal_set_xco["ORDERDESC"] = $cost_calculations["desc"];
 																		$paypal_set_xco["BA_DESC"] = $cost_calculations["desc"];
+																		// This is required to get the description to show up during checkout; and in `mb_desc` via IPNs.
+																		$paypal_set_xco["L_BILLINGAGREEMENTDESCRIPTION0"] = $cost_calculations["desc"];
+
+																		$paypal_set_xco["CUSTOM"] = $_SERVER["HTTP_HOST"];
 																		$paypal_set_xco["BA_CUSTOM"] = $_SERVER["HTTP_HOST"];
+																		$paypal_set_xco["L_BILLINGAGREEMENTCUSTOM0"] = $_SERVER["HTTP_HOST"];
 
 																		$paypal_set_xco["ADDROVERRIDE"] = "1";
 																		$paypal_set_xco["SHIPTONAME"] = $post_vars["name"];
@@ -176,7 +193,7 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 
 																		if(($paypal_set_xco = c_ws_plugin__s2member_paypal_utilities::paypal_payflow_api_response($paypal_set_xco)) && empty($paypal_set_xco["__error"]))
 																			{
-																				set_transient("s2m_".md5("s2member_transient_express_checkout_".$paypal_set_xco["TOKEN"]), $post_vars, 10800);
+																				set_transient("s2m_".md5("s2member_transient_express_checkout_".$paypal_set_xco["TOKEN"]), $_POST, 10800);
 
 																				$endpoint = ($GLOBALS["WS_PLUGIN__"]["s2member"]["o"]["paypal_sandbox"]) ? "www.sandbox.paypal.com" : "www.paypal.com";
 
@@ -203,6 +220,8 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 
 																		$paypal_set_xco["PAYMENTREQUEST_0_PAYMENTACTION"] = "Sale";
 
+																		$paypal_set_xco["MAXAMT"] = $cost_calculations["total"];
+
 																		$paypal_set_xco["PAYMENTREQUEST_0_DESC"] = $cost_calculations["desc"];
 																		$paypal_set_xco["PAYMENTREQUEST_0_CUSTOM"] = $post_vars["attr"]["custom"];
 
@@ -227,7 +246,7 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 
 																		if(($paypal_set_xco = c_ws_plugin__s2member_paypal_utilities::paypal_api_response($paypal_set_xco)) && empty($paypal_set_xco["__error"]))
 																			{
-																				set_transient("s2m_".md5("s2member_transient_express_checkout_".$paypal_set_xco["TOKEN"]), $post_vars, 10800);
+																				set_transient("s2m_".md5("s2member_transient_express_checkout_".$paypal_set_xco["TOKEN"]), $_POST, 10800);
 
 																				$endpoint = ($GLOBALS["WS_PLUGIN__"]["s2member"]["o"]["paypal_sandbox"]) ? "www.sandbox.paypal.com" : "www.paypal.com";
 
@@ -280,7 +299,6 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 																		$paypal["FAILEDOPTIONALTRXACTION"] = "CancelOnFailure";
 																		$paypal["FAILEDINITAMTACTION"] = "CancelOnFailure";
 																	}
-
 																$paypal["CURRENCY"] = $cost_calculations["cur"];
 																$paypal["AMT"] = $cost_calculations["sub_total"];
 																$paypal["TAXAMT"] = $cost_calculations["tax"];
@@ -323,7 +341,6 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 																					$paypal["CARDISSUE"] = $post_vars["card_start_date_issue_number"];
 																				unset /* A little housekeeping. */($_m);
 																			}
-
 																		$paypal["STREET"] = $post_vars["street"];
 																		$paypal["CITY"] = $post_vars["city"];
 																		$paypal["STATE"] = $post_vars["state"];
@@ -341,6 +358,10 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 																	{
 																		$ipn["txn_type"] = "subscr_signup";
 																		$ipn["subscr_id"] = $new__subscr_id;
+
+																		if(!empty($paypal_xco_bagree["BAID"]))
+																			$ipn["subscr_baid"] = $paypal_xco_bagree["BAID"];
+
 																		$ipn["custom"] = $post_vars["attr"]["custom"];
 
 																		$ipn["txn_id"] = $new__subscr_id;
@@ -380,7 +401,7 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 
 																		$ipn["s2member_paypal_proxy_return_url"] = trim(c_ws_plugin__s2member_utils_urls::remote(site_url("/?s2member_paypal_notify=1"), $ipn, array("timeout" => 20)));
 																	}
-																if($old__subscr_id) // There is an old Recurring Profile?
+																if($old__subscr_id && apply_filters("s2member_pro_cancels_old_rp_before_new_rp", TRUE, get_defined_vars()))
 																	c_ws_plugin__s2member_pro_paypal_utilities::payflow_cancel_profile($old__subscr_id, $old__baid);
 
 																setcookie("s2member_tracking", ($s2member_tracking = c_ws_plugin__s2member_utils_encryption::encrypt($new__subscr_id)), time() + 31556926, COOKIEPATH, COOKIE_DOMAIN).setcookie("s2member_tracking", $s2member_tracking, time() + 31556926, SITECOOKIEPATH, COOKIE_DOMAIN).($_COOKIE["s2member_tracking"] = $s2member_tracking);
@@ -426,7 +447,6 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 																		$paypal["FAILEDOPTIONALTRXACTION"] = "CancelOnFailure";
 																		$paypal["FAILEDINITAMTACTION"] = "CancelOnFailure";
 																	}
-
 																$paypal["CURRENCY"] = $cost_calculations["cur"];
 																$paypal["AMT"] = $cost_calculations["sub_total"];
 																$paypal["TAXAMT"] = $cost_calculations["tax"];
@@ -469,7 +489,6 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 																					$paypal["CARDISSUE"] = $post_vars["card_start_date_issue_number"];
 																				unset /* A little housekeeping. */($_m);
 																			}
-
 																		$paypal["STREET"] = $post_vars["street"];
 																		$paypal["CITY"] = $post_vars["city"];
 																		$paypal["STATE"] = $post_vars["state"];
@@ -487,6 +506,10 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 																	{
 																		$ipn["txn_type"] = "subscr_signup";
 																		$ipn["subscr_id"] = $new__subscr_id;
+
+																		if(!empty($paypal_xco_bagree["BAID"]))
+																			$ipn["subscr_baid"] = $paypal_xco_bagree["BAID"];
+
 																		$ipn["custom"] = $post_vars["attr"]["custom"];
 
 																		$ipn["txn_id"] = $new__subscr_id;
@@ -540,6 +563,8 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 																					if(isset($post_vars["custom_fields"][$field_var]))
 																						$_POST["ws_plugin__s2member_custom_reg_field_".$field_var] = $post_vars["custom_fields"][$field_var];
 																				}
+																		if(!empty($paypal_xco_bagree["BAID"])) // For registration configuration.
+																			$GLOBALS["ws_plugin__s2member_registration_vars"]["ws_plugin__s2member_custom_reg_field_s2member_subscr_baid"] = $paypal_xco_bagree["BAID"];
 
 																		$_COOKIE["s2member_subscr_gateway"] = c_ws_plugin__s2member_utils_encryption::encrypt("paypal"); // Fake this for registration configuration.
 																		$_COOKIE["s2member_subscr_id"] = c_ws_plugin__s2member_utils_encryption::encrypt($new__subscr_id); // Fake this for registration configuration.
@@ -714,7 +739,7 @@ if(!class_exists("c_ws_plugin__s2member_pro_paypal_checkout_pf_in"))
 
 																		$ipn["s2member_paypal_proxy_return_url"] = trim(c_ws_plugin__s2member_utils_urls::remote(site_url("/?s2member_paypal_notify=1"), $ipn, array("timeout" => 20)));
 																	}
-																if(!$is_independent_ccaps_sale && $old__subscr_id) // There is an old Recurring Profile?
+																if(!$is_independent_ccaps_sale && $old__subscr_id && apply_filters("s2member_pro_cancels_old_rp_before_new_rp", TRUE, get_defined_vars()))
 																	c_ws_plugin__s2member_pro_paypal_utilities::payflow_cancel_profile($old__subscr_id, $old__baid);
 
 																setcookie("s2member_tracking", ($s2member_tracking = c_ws_plugin__s2member_utils_encryption::encrypt($new__subscr_id)), time() + 31556926, COOKIEPATH, COOKIE_DOMAIN).setcookie("s2member_tracking", $s2member_tracking, time() + 31556926, SITECOOKIEPATH, COOKIE_DOMAIN).($_COOKIE["s2member_tracking"] = $s2member_tracking);

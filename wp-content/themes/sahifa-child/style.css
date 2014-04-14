@@ -3,7 +3,7 @@
  Description:   Official NHAP theme based on Sahifa
  Author:        Peter Bamford
  Template:      sahifa
- Version:		4.2.0
+ Version:		4.2.2
 */
 
 @import url("../sahifa/style.css");
@@ -187,3 +187,8 @@ display:none;
 div.widget.social-icons-widget {
 margin-bottom: 45px;
 }
+
+.widget_twitter-tracker, .widget_twitter-profile-tracker li { background-image:none !important; }
+.widget_twitter-tracker, .widget_twitter-profile-tracker ol ul li { list-style-type: none !important; }
+ol.tweets { padding:0px !important; margin: 0 !important; }
+.avatar a {display: none;}

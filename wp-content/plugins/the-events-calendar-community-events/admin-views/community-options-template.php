@@ -40,21 +40,19 @@ $trash_vs_delete_options = array(
 
 $venue_options = array();
 $organizer_options = array();
-if ( TribeEvents::ecpActive() ) {
-	$organizers = TribeEvents::instance()->get_organizer_info();
-	if ( is_array( $organizers ) && !empty( $organizers ) ) {
-		$organizer_options[0] = __( 'No Default', 'tribe-events-community' );
-		foreach ( $organizers as $organizer ) {
-			$organizer_options[$organizer->ID] = $organizer->post_title;
-		}
+$organizers = TribeEvents::instance()->get_organizer_info();
+if ( is_array( $organizers ) && !empty( $organizers ) ) {
+	$organizer_options[0] = __( 'No Default', 'tribe-events-community' );
+	foreach ( $organizers as $organizer ) {
+		$organizer_options[$organizer->ID] = $organizer->post_title;
 	}
+}
 
-	$venues = TribeEvents::instance()->get_venue_info();
-	if ( is_array( $venues ) && !empty( $venues ) ) {
-		$venue_options[0] = __( 'Use New Venue/No Default', 'tribe-events-community' );
-		foreach ( $venues as $venue ) {
-			$venue_options[$venue->ID] = $venue->post_title;
-		}
+$venues = TribeEvents::instance()->get_venue_info();
+if ( is_array( $venues ) && !empty( $venues ) ) {
+	$venue_options[0] = __( 'Use New Venue/No Default', 'tribe-events-community' );
+	foreach ( $venues as $venue ) {
+		$venue_options[$venue->ID] = $venue->post_title;
 	}
 }
 
@@ -248,7 +246,7 @@ $communityTab = array(
 		'ecp-heading' => array(
 			'type' => 'html',
 			'html' => '<h3>'.__('PRO Options', 'tribe-events-community') . '</h3>',
-			'conditional' => ( TribeEvents::ecpActive() && ( $venue_options || $organizer_options ) ),
+			'conditional' => ( class_exists('TribeEventsPro') && ( $venue_options || $organizer_options ) ),
 		),
 
 		'defaultCommunityVenueID' => array(
@@ -259,7 +257,7 @@ $communityTab = array(
 			'options' => $venue_options,
 			'parent_option' => TribeCommunityEvents::OPTIONNAME,
 			'can_be_empty' => true,
-			'conditional' => ( TribeEvents::ecpActive() && $venue_options ),
+			'conditional' => ( class_exists('TribeEventsPro') && $venue_options ),
 		),
 
 		'defaultCommunityOrganizerID' => array(
@@ -270,7 +268,7 @@ $communityTab = array(
 			'options' => $organizer_options,
 			'parent_option' => TribeCommunityEvents::OPTIONNAME,
 			'can_be_empty' => true,
-			'conditional' => ( TribeEvents::ecpActive() && $organizer_options ),
+			'conditional' => ( class_exists('TribeEventsPro') && $organizer_options ),
 		),
 
 		'tribe_community_events_wrapper_closer' => array(
@@ -283,5 +281,5 @@ $communityTab = array(
 );
 
 function tribe_display_current_community_events_slug() {
-	echo '<p class="tribe-field-indent tribe-field-description description"><code>' . tribe_get_events_link() . TribeCommunityEvents::getOption( 'communityRewriteSlug', 'community', true ) . '/add</code><br /><code>' . tribe_get_events_link() . TribeCommunityEvents::getOption( 'communityRewriteSlug', 'community', true ) . '/list</code></p>';
+	echo '<p class="tribe-field-indent tribe-field-description description"><code>' . tribe_get_events_link() . TribeCommunityEvents::instance()->getOption( 'communityRewriteSlug', 'community', true ) . '/add</code><br /><code>' . tribe_get_events_link() . TribeCommunityEvents::instance()->getOption( 'communityRewriteSlug', 'community', true ) . '/list</code></p>';
 }
